@@ -10,4 +10,7 @@ const events = require('./events.js')
 
 $(() => {
   events.addHandlers()
+  // $('list-choice').hide()
+  $('.reps').hide()
+  $('.search').hide()
 })

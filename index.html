@@ -16,8 +16,8 @@
       <nav>
         <div class="app-name">RepRepo</div>
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
         </form>
         <div class="nav-buttons">
           <div class="dropdown">
@@ -39,7 +39,9 @@
               <form id="sign-out" class="dropdown-item">
                 <input type="submit" value="Sign out" class="btn btn-success btn-block kill-dropdown">
               </form>
-              <!-- <button class="dropdown-item" type="button">Something else here</button> -->
+              <div class="dropdown-footer">
+                <p class="dropdown-item change-password-message"></p>
+              </div>
             </div>
           </div>
           <!-- <form id="sign-out" class="disappear">
@@ -48,6 +50,7 @@
         </div>
       </nav>
       <div class="list-choice container-fluid">
+        <h4 class="step-one">Sign in to access repertoire</h4>
         <h4 id="full-rep" class="reps">Full Repertoire</h4>
         <h4 id="my-rep" class="reps">My Repertoire</h4>
         <h4 id="our-rep" class="reps">Our Repertoire</h4>
@@ -55,22 +58,22 @@
       <hr />
       <main>
       <div class="initLog">
-      <h4 class="step-one">Sign in to access repertoire</h4>
       <form id="sign-up">
         <h3>Sign up</h3>
-          <input type="text" name="credentials[email]" placeholder="Email">
-          <input type="password" name="credentials[password]" placeholder="Password">
-          <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
-          <br><input type="submit" value="Sign up" class="btn btn-success">
+          <input class="third" type="text" name="credentials[email]" placeholder="Email">
+          <input class="third" type="password" name="credentials[password]" placeholder="Password">
+          <input class="third" type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+          <br><input type="submit" value="Sign up" class="btn btn-success btn-block">
       </form>
       <form id="sign-in">
         <h3>Sign in</h3>
-          <input type="text" name="credentials[email]" placeholder="Email">
-          <input type="password" name="credentials[password]" placeholder="Password">
-          <br><input type="submit" value="Sign in" class="btn btn-success">
+          <input class="third" type="text" name="credentials[email]" placeholder="Email">
+          <input class="third" type="password" name="credentials[password]" placeholder="Password">
+          <br><input type="submit" value="Sign in" class="btn btn-success btn-block third">
       </form>
-      <p id="log-message"></p>
+      <!-- <p id="log-message"></p> -->
       </div>
+      <p id="log-message"></p>
       <div class="col-12 index-master-tunes">
         <p class="master_tunes"></p>
       </div>

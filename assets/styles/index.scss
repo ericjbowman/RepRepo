@@ -56,6 +56,10 @@ footer {
   background-color: white;
 }
 
+.dropdown-item:hover {
+  background-color: white;
+}
+
 #sign-out {
   display: inline-block;
 }
@@ -64,10 +68,31 @@ footer {
   margin-top: 75px;
   display: flex;
   justify-content: space-around;
+  height: 2em;
+}
+
+#step-on, .reps {
+  padding-top: 5px;
+}
+
+.dropdown-footer {
+  height: 2em;
 }
 
 .initLog {
+  // margin-left: 20px;
+  // display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 33%;
+}
+
+#log-message {
   margin-left: 20px;
+}
+
+.third {
+  width: 100%;
 }
 
 .index-master-tunes {

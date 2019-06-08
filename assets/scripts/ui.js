@@ -23,6 +23,9 @@ const showMasterTunes = function () {
 
 const signInSuccess = function (data) {
   $('#dropdownMenu2').removeClass('disappear')
+  $('list-choice').show()
+  $('.search').show()
+  $('.reps').show()
   $('form').trigger('reset')
   $('.add').html('Add to My Repertoire')
   $('.add').removeClass('disappear')
@@ -60,6 +63,9 @@ const showTunes = function (data) {
 
 const signOutSuccess = function () {
   $('#dropdownMenu2').addClass('disappear')
+  $('.search').hide()
+  $('list-choice').hide()
+  $('.reps').hide()
   $('#sign-up').show()
   $('#sign-in').show()
   $('#log-message').html('Signed out!')
@@ -67,10 +73,26 @@ const signOutSuccess = function () {
   $('.action').addClass('disappear')
 }
 
+const changePasswordSuccess = function () {
+  $('.change-password-message').html('')
+  $('.change-password-message').show()
+  $('.change-password-message').html('Password Changed!')
+  $('.change-password-message').delay(2000).fadeOut()
+}
+
+const changePasswordFailure = function () {
+  $('.change-password-message').html('')
+  $('.change-password-message').show()
+  $('.change-password-message').html('Failure!')
+  $('.change-password-message').delay(2000).fadeOut()
+}
+
 module.exports = {
   signInSuccess,
   signUpSuccess,
   signOutSuccess,
+  changePasswordSuccess,
+  changePasswordFailure,
   showMasterTunes,
   showTunes
 }
