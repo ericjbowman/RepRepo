@@ -1,1 +1,20 @@
 @import '~bootstrap/scss/bootstrap';
+
+.top-nav {
+  @extend .navbar;
+  @extend .navbar-dark;
+  @extend .bg-dark;
+  @extend .fixed-top;
+
+  .app-name {
+    @extend .navbar-brand;
+    @extend .h1;
+    margin-bottom: 0;
+  }
+}
+
+.list-choice {
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-around;
+}
