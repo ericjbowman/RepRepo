@@ -13,8 +13,28 @@ nav {
   }
 }
 
+.selected {
+  color: green;
+}
+
+.reps:hover {
+  color: green;
+}
+
+#sign-out{
+  display: inline-block;
+}
+
 .list-choice {
   margin-top: 75px;
   display: flex;
   justify-content: space-around;
+}
+
+.initLog {
+  margin-left: 20px;
+}
+
+.index-master-tunes{
+  margin-left: 20px;
 }

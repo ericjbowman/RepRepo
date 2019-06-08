@@ -15,6 +15,10 @@ const showMasterTunes = function () {
 }
 
 const signInSuccess = function (data) {
+  $('#sign-up').hide()
+  $('#sign-in').hide()
+  $('.step-one').hide()
+  $('#full-rep').addClass('selected')
   store.user = data.user
   $('#log-message').html('Signed in!')
   api.indexMasterTunes()
@@ -27,7 +31,14 @@ const signInSuccess = function (data) {
     // .catch($('#log-message').append(' Index failed!'))
 }
 
+const signOutSuccess = function () {
+  $('#sign-up').show()
+  $('#sign-in').show()
+  $('#log-message').html('Signed out!')
+}
+
 module.exports = {
   signInSuccess,
-  signUpSuccess
+  signUpSuccess,
+  signOutSuccess
 }

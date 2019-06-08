@@ -20,18 +20,20 @@
         </form>
         <div class="nav-buttons">
           <button id="getBooksButton" class="btn btn-info mr-2">Account</button>
-          <button id="clearBooksButton" class="btn btn-outline-info">Sign Out</button>
+          <form id="sign-out" class="disappear">
+            <input type="submit" value="Sign out" class="btn btn-info">
+          </form>
         </div>
       </nav>
       <div class="list-choice container-fluid">
-        <h4>Full Repertoire</h4>
-        <h4>My Repertoire</h4>
-        <h4>Our Repertoire</h4>
+        <h4 id="full-rep" class="reps">Full Repertoire</h4>
+        <h4 id="my-rep" class="reps">My Repertoire</h4>
+        <h4 id="our-rep" class="reps">Our Repertoire</h4>
       </div>
       <hr />
       <main>
       <div class="initLog">
-      <h4 class="failure">Sign in to access repertoire</h4>
+      <h4 class="step-one">Sign in to access repertoire</h4>
       <form id="sign-up">
         <h3>Sign up</h3>
           <input type="text" name="credentials[email]" placeholder="Email">
@@ -47,7 +49,7 @@
       </form>
       <p id="log-message"></p>
       </div>
-      <div class="col-12">
+      <div class="col-12 index-master-tunes">
         <p class="master_tunes"></p>
       </div>
       </main>
