@@ -14,12 +14,16 @@ const showMasterTunes = function () {
   })
   $('#log-message').html(`${display}`)
   $('#my-rep').removeClass('selected')
+  $('.add').html('Add to My Repertoire')
+  $('.remove').addClass('disappear')
+  $('.edit').addClass('disappear')
   // $('#2').addClass('selected')
 }
 
 const signInSuccess = function (data) {
   $('form').trigger('reset')
-  $('.action').removeClass('disappear')
+  $('.add').html('Add to My Repertoire')
+  $('.add').removeClass('disappear')
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('.step-one').hide()

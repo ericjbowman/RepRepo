@@ -39,6 +39,8 @@ const onChangePassword = function (event) {
 }
 
 const onClickMyRepertoire = function () {
+  $('.action').removeClass('disappear')
+  $('.add').html('New')
   api.indexTunes()
     .then(ui.showTunes)
 }
@@ -55,7 +57,7 @@ const addCheckedMasterTunes = function () {
   }
 }
 
-const addCheckedTunes = function () {
+const deleteCheckedTunes = function () {
   if ($('#my-rep').hasClass('selected')) {
     // let deleteIds = []
     for (let i = 1; i <= 100; i++) {
@@ -79,7 +81,7 @@ const addHandlers = () => {
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
   $('.add').on('click', addCheckedMasterTunes)
-  $('.remove').on('click', addCheckedTunes)
+  $('.remove').on('click', deleteCheckedTunes)
 }
 
 module.exports = {
