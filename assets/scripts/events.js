@@ -41,7 +41,24 @@ const onChangePassword = function (event) {
 const onClickMyRepertoire = function () {
   $('.action').removeClass('disappear')
   $('.add').html('New')
+  $('.add').addClass('new')
+  $('.new').on('click', onClickNew)
   api.indexTunes()
+    .then(ui.showTunes)
+}
+
+let tuneData = {
+  tune: {
+    title: 'Sample',
+    composer: 'Dr. Ebow'
+  }
+}
+
+const onClickNew = function () {
+  console.log('new was clicked!')
+  api.createTune(tuneData)
+    .then(() => console.log('Created a tune!'))
+    .then(api.indexTunes)
     .then(ui.showTunes)
 }
 

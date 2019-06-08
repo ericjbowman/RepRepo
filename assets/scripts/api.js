@@ -74,6 +74,17 @@ const deleteTune = function (id) {
   })
 }
 
+const createTune = function (data) {
+  return $.ajax({
+    url: config.apiUrl + '/tunes',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -82,5 +93,6 @@ module.exports = {
   indexMasterTunes,
   indexTunes,
   showTune,
-  deleteTune
+  deleteTune,
+  createTune
 }
