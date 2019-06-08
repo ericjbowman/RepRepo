@@ -10,12 +10,14 @@ nav {
     @extend .navbar-brand;
     @extend .h1;
     margin-bottom: 0;
+    font-family: 'Montserrat Alternates', sans-serif;
   }
 }
 
 .selected {
   color: green;
 }
+
 
 .reps:hover {
   color: green;
@@ -38,3 +40,7 @@ nav {
 .index-master-tunes{
   margin-left: 20px;
 }
+
+// font-family: 'Josefin Sans', sans-serif;
+// font-family: 'Righteous', cursive;
+// font-family: 'Montserrat Alternates', sans-serif;
