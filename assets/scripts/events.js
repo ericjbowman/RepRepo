@@ -3,6 +3,7 @@
 const getFormFields = require(`../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
+const store = require('./store')
 
 const onSignUp = function (event) {
   event.preventDefault()
@@ -41,6 +42,21 @@ const onClickMyRepertoire = function () {
   api.indexTunes()
     .then(ui.showTunes)
 }
+
+let checkedTunes = []
+const addCheckedMasterTunes = function () {
+  console.log('add was clicked')
+  console.log('1 is', $('#1').html())
+  for (let i = 1; i < store.masterTunes.length; i++) {
+    if ($(`#${i}`).prop('checked')) {
+      console.log('checked tune is', $(`#${i}`).parent().text())
+      checkedTunes.push($(`#${i}`).parent().text())
+    }
+  }
+  // if ($('#1').prop('checked')) {
+  //   console.log('1 is checked')
+  // }
+}
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -48,6 +64,7 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword)
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
+  $('.add').on('click', addCheckedMasterTunes)
 }
 
 module.exports = {

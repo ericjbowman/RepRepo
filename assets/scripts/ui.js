@@ -10,10 +10,11 @@ const showMasterTunes = function () {
   let display = ''
   store.masterTunes.forEach(tune => {
     display += `<div><label class="checkbox-inline">
-      <input type="checkbox" value=""> ${tune.title}, ${tune.composer}</label></div>`
+      <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
   })
   $('#log-message').html(`${display}`)
   $('#my-rep').removeClass('selected')
+  // $('#2').addClass('selected')
 }
 
 const signInSuccess = function (data) {
