@@ -45,7 +45,7 @@ const showTunes = function (data) {
   let display = ''
   userTunes.forEach(tune => {
     display += `<div><label class="checkbox-inline">
-      <input type="checkbox" value=""> ${tune.title}, ${tune.composer}</label></div>`
+      <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
   })
   $('#log-message').html(`${display}`)
   $('#full-rep').removeClass('selected')

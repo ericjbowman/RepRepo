@@ -47,16 +47,30 @@ let checkedTunes = []
 const addCheckedMasterTunes = function () {
   console.log('add was clicked')
   console.log('1 is', $('#1').html())
-  for (let i = 1; i < store.masterTunes.length; i++) {
+  for (let i = 1; i <= store.masterTunes.length; i++) {
     if ($(`#${i}`).prop('checked')) {
       console.log('checked tune is', $(`#${i}`).parent().text())
       checkedTunes.push($(`#${i}`).parent().text())
     }
   }
-  // if ($('#1').prop('checked')) {
-  //   console.log('1 is checked')
-  // }
 }
+
+const addCheckedTunes = function () {
+  if ($('#my-rep').hasClass('selected')) {
+    // let deleteIds = []
+    for (let i = 1; i <= 100; i++) {
+      if ($(`#${i}`).prop('checked')) {
+        console.log('checked tune is', $(`#${i}`).parent().text())
+        // deleteIds.push(i)
+        api.deleteTune(i)
+          .then(onClickMyRepertoire)
+          .catch(() => console.log('Delete failed'))
+      }
+    }
+    // console.log('deleteIds are', deleteIds)
+  }
+}
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -65,6 +79,7 @@ const addHandlers = () => {
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
   $('.add').on('click', addCheckedMasterTunes)
+  $('.remove').on('click', addCheckedTunes)
 }
 
 module.exports = {

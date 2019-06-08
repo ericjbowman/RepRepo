@@ -57,11 +57,30 @@ const indexTunes = function () {
   })
 }
 
+const showTune = function (id) {
+  return $.ajax({
+    url: config.apiUrl + '/tunes/' + id,
+    method: 'GET'
+  })
+}
+
+const deleteTune = function (id) {
+  return $.ajax({
+    url: config.apiUrl + '/tunes/' + id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
   indexMasterTunes,
-  indexTunes
+  indexTunes,
+  showTune,
+  deleteTune
 }
