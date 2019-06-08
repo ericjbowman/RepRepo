@@ -39,6 +39,10 @@ const onChangePassword = function (event) {
 }
 
 const onClickMyRepertoire = function () {
+  $('.remove').addClass('col-4')
+  $('.edit').addClass('col-4')
+  $('.add').removeClass('col-12')
+  $('.add').addClass('col-4')
   $('.action').removeClass('disappear')
   $('.add').html('New')
   $('.add').addClass('new')

@@ -33,6 +33,7 @@ const signInSuccess = function (data) {
   $('#sign-in').hide()
   $('.step-one').hide()
   $('#full-rep').addClass('selected')
+  $('.actions').removeClass('disappear')
   store.user = data.user
   console.log('store.user is', store.user)
   // $('#log-message').html('Signed in!')
@@ -73,6 +74,9 @@ const signOutSuccess = function () {
   $('.step-one').show()
   $('.reps').removeClass('selected')
   $('.action').addClass('disappear')
+  $('.actions').addClass('disappear')
+  $('.remove').removeClass('col-4')
+  $('.edit').removeClass('col-4')
 }
 
 const changePasswordSuccess = function () {

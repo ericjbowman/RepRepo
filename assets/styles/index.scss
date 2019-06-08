@@ -25,10 +25,6 @@ footer {
   bottom: 0;
 }
 
-.disappear {
-  display: none;
-}
-
 .actions {
   display: flex;
   justify-content: space-around;
@@ -42,6 +38,8 @@ footer {
   margin-bottom: 10px;
   margin-top: 10px;
   font-size: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .reps:hover {
@@ -71,8 +69,8 @@ footer {
   height: 2em;
 }
 
-#step-on, .reps {
-  padding-top: 5px;
+#step-one, .reps {
+  // padding-top: 5px;
 }
 
 .dropdown-footer {
@@ -97,6 +95,84 @@ footer {
 
 .index-master-tunes {
   margin-left: 20px;
+}
+
+span {
+  position: relative;
+}
+
+span::before, span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: white;
+  transform: scaleY(0);
+  transition: transform 0.5s ease;
+}
+
+span::before {
+  left: -8px;
+  transform-origin: center top;
+}
+
+span:hover::before {
+  transform-origin: center bottom;
+  transform: scaleY(1);
+}
+
+span::after {
+  right: -8px;
+  transform-origin: center bottom;
+}
+
+span:hover::after {
+  transform-origin: center top;
+  transform: scaleY(1);
+}
+
+
+
+
+
+
+h4 {
+  position: relative;
+}
+
+h4::before, h4::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: green;
+  transform: scaleY(0);
+  transition: transform 0.5s ease;
+}
+
+h4::before {
+  left: -8px;
+  transform-origin: center top;
+}
+
+h4:hover::before {
+  transform-origin: center bottom;
+  transform: scaleY(1);
+}
+
+h4::after {
+  right: -8px;
+  transform-origin: center bottom;
+}
+
+h4:hover::after {
+  transform-origin: center top;
+  transform: scaleY(1);
+}
+.disappear {
+  display: none;
 }
 
 // font-family: 'Josefin Sans', sans-serif;
