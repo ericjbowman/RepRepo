@@ -37,11 +37,17 @@ const onChangePassword = function (event) {
     // .catch(ui.changePasswordFailure)
 }
 
+const onClickMyRepertoire = function () {
+  api.indexTunes()
+    .then(ui.showTunes)
+}
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#sign-out').on('submit', onSignOut)
   $('#change-password').on('submit', onChangePassword)
+  $('#my-rep').on('click', onClickMyRepertoire)
+  $('#full-rep').on('click', ui.showMasterTunes)
 }
 
 module.exports = {

@@ -13,6 +13,7 @@ const showMasterTunes = function () {
       <input type="checkbox" value=""> ${tune.title}, ${tune.composer}</label></div>`
   })
   $('#log-message').html(`${display}`)
+  $('#my-rep').removeClass('selected')
 }
 
 const signInSuccess = function (data) {
@@ -23,6 +24,7 @@ const signInSuccess = function (data) {
   $('.step-one').hide()
   $('#full-rep').addClass('selected')
   store.user = data.user
+  console.log('store.user is', store.user)
   // $('#log-message').html('Signed in!')
   api.indexMasterTunes()
     .then((index) => {
@@ -32,6 +34,21 @@ const signInSuccess = function (data) {
     // .then(() => $('#log-message').html(`${store.masterTunes[0].title}`))
     .then(showMasterTunes)
     // .catch($('#log-message').append(' Index failed!'))
+}
+
+const showTunes = function (data) {
+  store.tunes = data.tunes
+  let userTunes = []
+  userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+  console.log('store.tunes is', userTunes)
+  let display = ''
+  userTunes.forEach(tune => {
+    display += `<div><label class="checkbox-inline">
+      <input type="checkbox" value=""> ${tune.title}, ${tune.composer}</label></div>`
+  })
+  $('#log-message').html(`${display}`)
+  $('#full-rep').removeClass('selected')
+  $('#my-rep').addClass('selected')
 }
 
 const signOutSuccess = function () {
@@ -44,5 +61,7 @@ const signOutSuccess = function () {
 module.exports = {
   signInSuccess,
   signUpSuccess,
-  signOutSuccess
+  signOutSuccess,
+  showMasterTunes,
+  showTunes
 }

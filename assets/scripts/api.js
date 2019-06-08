@@ -50,10 +50,18 @@ const indexMasterTunes = function () {
   })
 }
 
+const indexTunes = function () {
+  return $.ajax({
+    url: config.apiUrl + '/tunes',
+    method: 'GET'
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   signOut,
   changePassword,
-  indexMasterTunes
+  indexMasterTunes,
+  indexTunes
 }
