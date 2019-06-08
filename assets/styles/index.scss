@@ -77,6 +77,10 @@ footer {
   height: 2em;
 }
 
+.modal-body, .modal-header, .modal-footer {
+  margin: 0 auto;
+}
+
 .initLog {
   // margin-left: 20px;
   // display: flex;
