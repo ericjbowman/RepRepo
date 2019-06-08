@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
-.top-nav {
+nav {
   @extend .navbar;
   @extend .navbar-dark;
   @extend .bg-dark;
@@ -14,7 +14,7 @@
 }
 
 .list-choice {
-  margin-top: 70px;
+  margin-top: 75px;
   display: flex;
   justify-content: space-around;
 }

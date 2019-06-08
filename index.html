@@ -12,7 +12,7 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <nav class="top-nav">
+      <nav>
         <div class="app-name">RepRepo</div>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -24,18 +24,32 @@
         </div>
       </nav>
       <div class="list-choice container-fluid">
-        <span>
-          <h4>Full Repertoire</h4>
-        </span>
-        <span>
-          <h4>My Repertoire</h4>
-        </span>
-        <span>
-          <h4>Our Repertoire</h4>
-        </span>
+        <h4>Full Repertoire</h4>
+        <h4>My Repertoire</h4>
+        <h4>Our Repertoire</h4>
       </div>
+      <hr />
       <main>
-
+      <div class="initLog">
+      <h4 class="failure">Sign in to access repertoire</h4>
+      <form id="sign-up">
+        <h3>Sign up</h3>
+          <input type="text" name="credentials[email]" placeholder="Email">
+          <input type="password" name="credentials[password]" placeholder="Password">
+          <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+          <br><input type="submit" value="Sign up" class="btn btn-info">
+      </form>
+      <form id="sign-in">
+        <h3>Sign in</h3>
+          <input type="text" name="credentials[email]" placeholder="Email">
+          <input type="password" name="credentials[password]" placeholder="Password">
+          <br><input type="submit" value="Sign in" class="btn btn-info">
+      </form>
+      <p id="log-message"></p>
+      </div>
+      <div class="col-12">
+        <p class="master_tunes"></p>
+      </div>
       </main>
     </body>
 </html>
