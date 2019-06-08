@@ -1,5 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 
+$navdark: #343a40;
+
 nav {
   @extend .navbar;
   @extend .navbar-dark;
@@ -18,12 +20,35 @@ nav {
   color: green;
 }
 
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.disappear {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  background-color: green;
+  color: white;
+}
+
+.action {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+}
 
 .reps:hover {
   color: green;
 }
 
-#sign-out{
+#sign-out {
   display: inline-block;
 }
 
@@ -37,7 +62,7 @@ nav {
   margin-left: 20px;
 }
 
-.index-master-tunes{
+.index-master-tunes {
   margin-left: 20px;
 }
 

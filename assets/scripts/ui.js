@@ -9,13 +9,15 @@ const signUpSuccess = function (data) {
 const showMasterTunes = function () {
   let display = ''
   store.masterTunes.forEach(tune => {
-    display += `<div>${tune.title}, ${tune.composer}</div>`
+    display += `<div><label class="checkbox-inline">
+      <input type="checkbox" value=""> ${tune.title}, ${tune.composer}</label></div>`
   })
   $('#log-message').html(`${display}`)
 }
 
 const signInSuccess = function (data) {
   $('form').trigger('reset')
+  $('.action').removeClass('disappear')
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('.step-one').hide()
