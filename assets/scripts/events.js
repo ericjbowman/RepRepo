@@ -82,6 +82,7 @@ const addHandlers = () => {
   $('#full-rep').on('click', ui.showMasterTunes)
   $('.add').on('click', addCheckedMasterTunes)
   $('.remove').on('click', deleteCheckedTunes)
+  $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
 }
 
 module.exports = {

@@ -14,6 +14,7 @@ const showMasterTunes = function () {
   })
   $('#log-message').html(`${display}`)
   $('#my-rep').removeClass('selected')
+  $('#full-rep').addClass('selected')
   $('.add').html('Add to My Repertoire')
   $('.remove').addClass('disappear')
   $('.edit').addClass('disappear')
@@ -21,6 +22,7 @@ const showMasterTunes = function () {
 }
 
 const signInSuccess = function (data) {
+  $('#dropdownMenu2').removeClass('disappear')
   $('form').trigger('reset')
   $('.add').html('Add to My Repertoire')
   $('.add').removeClass('disappear')
@@ -57,10 +59,12 @@ const showTunes = function (data) {
 }
 
 const signOutSuccess = function () {
+  $('#dropdownMenu2').addClass('disappear')
   $('#sign-up').show()
   $('#sign-in').show()
   $('#log-message').html('Signed out!')
-  $('#full-rep').removeClass('selected')
+  $('.reps').removeClass('selected')
+  $('.action').addClass('disappear')
 }
 
 module.exports = {

@@ -48,6 +48,14 @@ footer {
   color: green;
 }
 
+.account-line {
+  margin-bottom: 8px;
+}
+
+.dropdown-item:active {
+  background-color: white;
+}
+
 #sign-out {
   display: inline-block;
 }
