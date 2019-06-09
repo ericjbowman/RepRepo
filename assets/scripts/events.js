@@ -46,7 +46,7 @@ const onClickMyRepertoire = function () {
   $('.action').removeClass('disappear')
   $('.add').html('New')
   $('.add').addClass('new')
-  $('.new').on('click', onClickNew)
+  // $('.new').on('click', onClickNew)
   $('.new-tune-waiting').attr('id', 'new-tune')
   api.indexTunes()
     .then(ui.showTunes)
@@ -59,7 +59,8 @@ let tuneData = {
   }
 }
 
-const onClickNew = function () {
+const onClickNew = function (event) {
+  event.preventDefault()
   console.log('new was clicked!')
   api.createTune(tuneData)
     .then(() => console.log('Created a tune!'))
@@ -95,6 +96,16 @@ const deleteCheckedTunes = function () {
   }
 }
 
+const onInputTuneData = function (event) {
+  event.preventDefault()
+  const newTuneData = getFormFields(this)
+  console.log('newTuneData is', newTuneData)
+}
+
+// const modsubmit = function (event) {
+//   event.preventDefault()
+// }
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -102,9 +113,12 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword)
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
-  $('.add').on('click', addCheckedMasterTunes)
+  // $('.add').on('click', addCheckedMasterTunes)
   $('.remove').on('click', deleteCheckedTunes)
   $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
+  // $('.input-tune-data').on('submit', onInputTuneData)
+//   $('.input-tune-data').on('submit', (event) => event.preventDefault)
+//   $('.modsub').on('submit', (event) => event.preventDefault)
 }
 
 module.exports = {
