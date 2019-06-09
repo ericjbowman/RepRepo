@@ -15,7 +15,7 @@
     <body>
       <nav>
         <div class="app-name">RepRepo</div>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0 search-bar">
           <input class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button>
         </form>
@@ -27,10 +27,10 @@
             <div class="dropdown-menu">
             <form id="change-password" class="dropdown-item">
               <div class="account-line">
-                <input type="password" name="passwords[old]" placeholder="Old Password">
+                <input type="password" name="passwords[old]" placeholder="Old Password" class="log-field">
               </div>
               <div class="account-line">
-                <input type="password" name="passwords[new]" placeholder="New Password">
+                <input type="password" name="passwords[new]" placeholder="New Password" class="log-field">
               </div>
               <div>
                 <input type="submit" value="Change Password" class="btn btn-success btn-block">
@@ -50,7 +50,7 @@
         </div>
       </nav>
       <div class="list-choice container-fluid">
-        <h4 class="step-one">Sign in to access repertoire</h4>
+        <h3 class="step-one">Sign in to access repertoire</h4>
         <h4 id="full-rep" class="reps">Full Repertoire</h4>
         <h4 id="my-rep" class="reps">My Repertoire</h4>
         <h4 id="our-rep" class="reps">Our Repertoire</h4>
@@ -59,16 +59,16 @@
       <main>
       <div class="initLog">
       <form id="sign-up">
-        <h3>Sign up</h3>
-          <input class="third" type="text" name="credentials[email]" placeholder="Email">
-          <input class="third" type="password" name="credentials[password]" placeholder="Password">
-          <input class="third" type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+        <h3 class="initLog-headers">Sign up</h3>
+          <input class="third log-field" type="text" name="credentials[email]" placeholder="Email">
+          <input class="third log-field" type="password" name="credentials[password]" placeholder="Password">
+          <input class="third log-field" type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
           <br><input type="submit" value="Sign up" class="btn btn-success btn-block">
       </form>
       <form id="sign-in">
-        <h3>Sign in</h3>
-          <input class="third" type="text" name="credentials[email]" placeholder="Email">
-          <input class="third" type="password" name="credentials[password]" placeholder="Password">
+        <h3 class="initLog-headers">Sign in</h3>
+          <input class="third log-field" type="text" name="credentials[email]" placeholder="Email">
+          <input class="third log-field" type="password" name="credentials[password]" placeholder="Password">
           <br><input type="submit" value="Sign in" class="btn btn-success btn-block third">
       </form>
       <!-- <p id="log-message"></p> -->

@@ -3,6 +3,7 @@
 $navdark: #343a40;
 
 nav {
+  // height: 4em;
   @extend .navbar;
   @extend .navbar-dark;
   @extend .bg-dark;
@@ -63,10 +64,11 @@ footer {
 }
 
 .list-choice {
-  margin-top: 75px;
+  margin-top: 4.5em;
   display: flex;
   justify-content: space-around;
-  height: 2em;
+  align-items: center;
+  height: 1em;
 }
 
 #step-one, .reps {
@@ -94,6 +96,10 @@ footer {
   margin: 0 auto;
   width: 33%;
 }
+// #sign-up, #sign-in {
+//   display: flex;
+//   justify-content: center;
+// }
 
 #log-message {
   margin-left: 20px;
@@ -181,6 +187,47 @@ h4::after {
 h4:hover::after {
   transform-origin: center top;
   transform: scaleY(1);
+}
+@media only screen and (max-width: 995px) {
+  .list-choice {
+    margin-top: 5.2em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .search-bar {
+    display: none;
+  }
+
+  .initLog {
+    width: 75%;
+  }
+
+  // .initLog-headers {
+  //   margin: 0 auto
+  // }
+
+  h4, h3 {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  label {
+    font-size: 12px;
+  }
+  .log-field {
+    // text-align: center;
+    border-width: .5px;
+    // border-color: gray;
+  }
+
+  .btn-block {
+    margin-bottom: .5em;
+  }
+
+  span {
+    font-size: 14px;
+  }
 }
 
 .disappear {
