@@ -70,6 +70,7 @@ const onClickNew = function (event) {
 
 let checkedTunes = []
 const addCheckedMasterTunes = function () {
+  checkedTunes = []
   console.log('add was clicked')
   console.log('1 is', $('#1').html())
   for (let i = 1; i <= store.masterTunes.length; i++) {
@@ -77,6 +78,25 @@ const addCheckedMasterTunes = function () {
       console.log('checked tune is', $(`#${i}`).parent().text())
       checkedTunes.push($(`#${i}`).parent().text())
     }
+  }
+  let x = checkedTunes.map((tune) => tune.trim())
+  let y = x.map((tune) => tune.split(','))
+  let titles = []
+  let composers = []
+  console.log('checked tunes are', y)
+  y.forEach((arr) => titles.push(arr[0]))
+  y.forEach((arr) => composers.push(arr[1]))
+  console.log('titles', titles)
+  console.log('composers', composers)
+  for (let i = 0; i < titles.length; i++) {
+    tuneData = {
+      tune: {
+        title: `${titles[i]}`,
+        composer: `${composers[i]}`
+      }
+    }
+    api.createTune(tuneData)
+      .then(() => console.log('Created a tune!'))
   }
 }
 
@@ -113,7 +133,7 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword)
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
-  // $('.add').on('click', addCheckedMasterTunes)
+  $('.add').on('click', addCheckedMasterTunes)
   $('.remove').on('click', deleteCheckedTunes)
   $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
   // $('.input-tune-data').on('submit', onInputTuneData)
