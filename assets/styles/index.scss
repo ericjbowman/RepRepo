@@ -75,6 +75,12 @@ footer {
 
 .dropdown-footer {
   height: 2em;
+  display: flex;
+  justify-content: center;
+}
+
+#change-password {
+  margin-top: 2em;
 }
 
 .modal-body, .modal-header, .modal-footer {
