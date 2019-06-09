@@ -47,6 +47,7 @@ const onClickMyRepertoire = function () {
   $('.add').html('New')
   $('.add').addClass('new')
   $('.new').on('click', onClickNew)
+  $('.new-tune-waiting').attr('id', 'new-tune')
   api.indexTunes()
     .then(ui.showTunes)
 }

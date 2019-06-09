@@ -18,6 +18,8 @@ const showMasterTunes = function () {
   $('.add').html('Add to My Repertoire')
   $('.remove').addClass('disappear')
   $('.edit').addClass('disappear')
+  $('.new-tune-waiting').attr('id', '')
+  $('.add').removeClass('new')
   // $('#2').addClass('selected')
 }
 

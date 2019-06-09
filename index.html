@@ -79,10 +79,11 @@
       </div>
       </main>
         <div class="actions container-fluid">
-          <span class="action disappear add">Add</span>
+          <span class="action disappear add" data-toggle="modal" data-target="#new-tune">Add</span>
           <span class="action disappear remove">Remove</span>
           <span class="action disappear edit" data-toggle="modal" data-target="#edit-tune">Edit</span>
         </div>
+        <!-- modals -->
         <div class="modal fade" id="edit-tune">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -94,6 +95,26 @@
                   <input type="text" name="title" placeholder="Title">
                   <input type="text" name="composer" placeholder="Composer">
                   <input type="submit" value="Edit" class="btn btn-success">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <p class="onEditTuneInput"><p>
+                <button type="button" class="btn btn-block btn-success cls" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade new-tune-waiting">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>New Tune</h3>
+              </div>
+              <div class="modal-body pwBody">
+                <form id="input-tune-data">
+                  <input type="text" name="title" placeholder="Title">
+                  <input type="text" name="composer" placeholder="Composer">
+                  <input type="submit" value="Enter" class="btn btn-success">
                 </form>
               </div>
               <div class="modal-footer">
