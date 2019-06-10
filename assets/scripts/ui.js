@@ -20,6 +20,7 @@ const showMasterTunes = function () {
   $('.edit').addClass('disappear')
   $('.new-tune-waiting').attr('id', '')
   $('.add').removeClass('new')
+  $('#our-rep').removeClass('selected')
   // $('#2').addClass('selected')
 }
 
@@ -63,6 +64,7 @@ const showTunes = function (data) {
   })
   $('#log-message').html(`${display}`)
   $('#full-rep').removeClass('selected')
+  $('#our-rep').removeClass('selected')
   $('#my-rep').addClass('selected')
 }
 
@@ -76,6 +78,8 @@ const showCombinedTunes = function (combinedTunes) {
 }
 
 const showUsers = function (data) {
+  $('#our-rep').addClass('selected')
+  $('#my-rep').removeClass('selected')
   let emailList = []
   store.userList = data
   console.log('userList is', store.userList.users)
