@@ -38,6 +38,7 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
+
 const onClickMyRepertoire = function () {
   $('.remove').addClass('col-4')
   $('.edit').addClass('col-4')
@@ -60,12 +61,30 @@ let tuneData = {
 }
 
 const onClickNew = function (event) {
-  event.preventDefault()
-  console.log('new was clicked!')
+  const input = getFormFields(this)
+  console.log('input is', input)
+  tuneData.tune.title = input.title
+  tuneData.tune.composer = input.composer
+  console.log(tuneData)
   api.createTune(tuneData)
     .then(() => console.log('Created a tune!'))
     .then(api.indexTunes)
     .then(ui.showTunes)
+}
+
+const onClickActions = function (event) {
+  $('#edit-tune-data').on('submit', function (event) {
+    event.preventDefault()
+  })
+  $('#input-tune-data').on('submit', function (event) {
+    event.preventDefault()
+  })
+  $('#input-tune-data').on('submit', onClickNew)
+  $('.remove').on('click', deleteCheckedTunes)
+  // api.createTune(tuneData)
+  //   .then(() => console.log('Created a tune!'))
+  //   .then(api.indexTunes)
+  //   .then(ui.showTunes)
 }
 
 let checkedTunes = []
@@ -103,7 +122,7 @@ const addCheckedMasterTunes = function () {
 const deleteCheckedTunes = function () {
   if ($('#my-rep').hasClass('selected')) {
     // let deleteIds = []
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
         console.log('checked tune is', $(`#${i}`).parent().text())
         // deleteIds.push(i)
@@ -125,6 +144,9 @@ const onInputTuneData = function (event) {
 // const modsubmit = function (event) {
 //   event.preventDefault()
 // }
+const onClickEdit = function (event) {
+  event.preventDefault()
+}
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
@@ -134,13 +156,15 @@ const addHandlers = () => {
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
   $('.add').on('click', addCheckedMasterTunes)
-  $('.remove').on('click', deleteCheckedTunes)
+  // $('.remove').on('click', deleteCheckedTunes)
   $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
+  $('.actions').on('click', onClickActions)
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)
 }
 
 module.exports = {
-  addHandlers
+  addHandlers,
+  onClickEdit
 }
