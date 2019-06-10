@@ -38,7 +38,6 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
-
 const onClickMyRepertoire = function () {
   $('.remove').addClass('col-4')
   $('.edit').addClass('col-4')
@@ -65,11 +64,25 @@ const onClickNew = function (event) {
   console.log('input is', input)
   tuneData.tune.title = input.title
   tuneData.tune.composer = input.composer
-  console.log(tuneData)
+  console.log('tune data is', tuneData)
+  if (store.tunes.some((storeTune) => {
+    return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
+  })) {
+    alert('Duplicate Found')
+  } else {
+  // const input = getFormFields(this)
+  // console.log('input is', input)
+  // tuneData.tune.title = input.title
+  // tuneData.tune.composer = input.composer
+  // console.log('tune data is', tuneData)
+  // if (isDoneYet === false) {
   api.createTune(tuneData)
     .then(() => console.log('Created a tune!'))
     .then(api.indexTunes)
     .then(ui.showTunes)
+  }
+      // .then(isDoneYet = true)
+  // }
 }
 
 const onClickActions = function (event) {

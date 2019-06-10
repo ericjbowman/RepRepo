@@ -79,6 +79,7 @@ const signOutSuccess = function () {
   $('.actions').addClass('disappear')
   $('.remove').removeClass('col-4')
   $('.edit').removeClass('col-4')
+  store.tunes = []
 }
 
 const changePasswordSuccess = function () {
