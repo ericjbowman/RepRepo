@@ -39,6 +39,8 @@ const onChangePassword = function (event) {
 }
 
 const onClickMyRepertoire = function () {
+  // $('.shared').addClass('add')
+  $('.shared').addClass('disappear')
   $('.remove').addClass('col-4')
   $('.edit').addClass('col-4')
   $('.add').removeClass('col-12')
@@ -70,6 +72,7 @@ let patchTuneData = {
 let tuneId = 0
 
 const onClickNew = function (event) {
+  if ($('#my-rep').hasClass('selected')) {
   event.preventDefault()
   $('#new-tune-message').html('Create a tune')
   const input = getFormFields(this)
@@ -87,8 +90,10 @@ const onClickNew = function (event) {
       .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
       .then(ui.showTunes)
+      .then(() => $('form').trigger('reset'))
       .catch(() => $('#new-tune-message').html('Failure'))
   }
+}
 }
 
 const onClickEditSubmit = function (event) {
@@ -104,6 +109,7 @@ const onClickEditSubmit = function (event) {
       .then(onClickMyRepertoire)
       .then(() => $('#edit-tune-message').html('Success'))
       .then(() => console.log('Patch success'))
+      .then(() => $('form').trigger('reset'))
       .catch(() => $('#edit-tune-message').html('Failure'))
   }
 }
@@ -229,6 +235,13 @@ const onInputTuneData = function (event) {
 // }
 
 const onClickOurRep = function () {
+  $('.shared').removeClass('disappear')
+  $('.add').addClass('disappear')
+  $('.remove').addClass('disappear')
+    $('.edit').addClass('disappear')
+  // $('.add').removeClass('add')
+  // $('.add').addClass('shared')
+  // $('.shared').on('click', findOurTunes)
   api.indexUsers()
     .then(ui.showUsers)
     // .then((data) => console.log(data))
@@ -253,6 +266,7 @@ const addHandlers = () => {
   $('.edit').on('click', onClickEdit)
   $('body').on('submit', '#input-tune-data', onClickNew)
   $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
+  $('body').on('click', '.shared', findOurTunes)
   $('#our-rep').on('click', onClickOurRep)
   $('.find-our-tunes').on('click', findOurTunes)
   // $('.input-tune-data').on('submit', onInputTuneData)

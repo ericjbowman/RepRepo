@@ -21,6 +21,8 @@ const showMasterTunes = function () {
   $('.new-tune-waiting').attr('id', '')
   $('.add').removeClass('new')
   $('#our-rep').removeClass('selected')
+  $('.shared').addClass('disappear')
+  $('.add').removeClass('disappear')
   // $('#2').addClass('selected')
 }
 
@@ -112,6 +114,7 @@ const signOutSuccess = function () {
 }
 
 const changePasswordSuccess = function () {
+  $('form').trigger('reset')
   $('.change-password-message').html('')
   $('.change-password-message').show()
   $('.change-password-message').html('Password Changed!')
@@ -119,6 +122,7 @@ const changePasswordSuccess = function () {
 }
 
 const changePasswordFailure = function () {
+  $('form').trigger('reset')
   $('.change-password-message').html('')
   $('.change-password-message').show()
   $('.change-password-message').html('Failure!')
