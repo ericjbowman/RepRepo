@@ -185,6 +185,21 @@ const onInputTuneData = function (event) {
 // const modsubmit = function (event) {
 //   event.preventDefault()
 // }
+// const poplulateStoreUserList = function (data) {
+//   store.userList = data
+//   console.log('data is ', data)
+// }
+
+const onClickOurRep = function () {
+  api.indexUsers()
+    .then(ui.showUsers)
+    // .then((data) => console.log(data))
+    // .then((data) => {
+    //   store.userList = data
+    // })
+    // .then((data) => console.log('store.userList is', store.userList))
+    // .then(ui.showUsers)
+}
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
@@ -200,6 +215,7 @@ const addHandlers = () => {
   $('.edit').on('click', onClickEdit)
   $('body').on('submit', '#input-tune-data', onClickNew)
   $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
+  $('#our-rep').on('click', onClickOurRep)
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)

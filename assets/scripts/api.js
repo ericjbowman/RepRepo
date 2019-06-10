@@ -96,6 +96,13 @@ const patchTune = function (i, tuneData) {
   })
 }
 
+const indexUsers = function () {
+  return $.ajax({
+    url: config.apiUrl + '/users',
+    method: 'GET'
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -106,5 +113,6 @@ module.exports = {
   showTune,
   deleteTune,
   createTune,
-  patchTune
+  patchTune,
+  indexUsers
 }

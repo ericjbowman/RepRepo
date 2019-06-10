@@ -66,6 +66,20 @@ const showTunes = function (data) {
   $('#my-rep').addClass('selected')
 }
 
+const showUsers = function (data) {
+  let emailList = []
+  store.userList = data
+  console.log('userList is', store.userList.users[4].email)
+  store.userList.users.forEach(tune => emailList.push(tune.email))
+  console.log('emailList is', emailList)
+  let display = ''
+  emailList.forEach(email => {
+    display += `<div><label class="checkbox-inline">
+      <input type="checkbox" value="">${email}</label></div>`
+  })
+  $('#log-message').html(`${display}`)
+}
+
 const signOutSuccess = function () {
   $('#dropdownMenu2').addClass('disappear')
   $('.search').hide()
@@ -105,5 +119,6 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   showMasterTunes,
-  showTunes
+  showTunes,
+  showUsers
 }
