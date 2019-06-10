@@ -188,6 +188,7 @@ const findCommonTunes = function () {
     })
   }
   console.log('combined tunes are', combinedTunes)
+  ui.showCombinedTunes(combinedTunes)
 }
 
 const findOurTunes = function () {

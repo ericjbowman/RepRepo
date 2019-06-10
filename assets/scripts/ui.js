@@ -66,6 +66,15 @@ const showTunes = function (data) {
   $('#my-rep').addClass('selected')
 }
 
+const showCombinedTunes = function (combinedTunes) {
+  let display = ''
+  combinedTunes.forEach(tune => {
+    display += `<div><label class="checkbox-inline">
+      <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
+  })
+  $('#log-message').html(`${display}`)
+}
+
 const showUsers = function (data) {
   let emailList = []
   store.userList = data
@@ -120,5 +129,6 @@ module.exports = {
   changePasswordFailure,
   showMasterTunes,
   showTunes,
-  showUsers
+  showUsers,
+  showCombinedTunes
 }
