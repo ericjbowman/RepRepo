@@ -175,10 +175,24 @@ const deleteCheckedTunes = function () {
     }
   }
 }
+let checkedUserTunes = []
+
+const findCommonTunes = function () {
+  console.log('second checked user tunes is', checkedUserTunes[1])
+  let combinedTunes = []
+  for (let i = 0; i < checkedUserTunes[0].length; i++) {
+    checkedUserTunes[1].forEach(tune => {
+      if (tune.title === checkedUserTunes[0][i].title) {
+        combinedTunes.push(tune)
+      }
+    })
+  }
+  console.log('combined tunes are', combinedTunes)
+}
 
 const findOurTunes = function () {
   console.log('something is checked!!')
-  let checkedUserTunes = []
+  // let checkedUserTunes = []
   for (let i = 1; i <= 5000; i++) {
     if ($(`#${i}`).prop('checked')) {
       console.log('something is checked!!')
@@ -190,6 +204,7 @@ const findOurTunes = function () {
     }
   }
   console.log('checked user tunes is ', checkedUserTunes)
+  findCommonTunes()
 }
 
 const onInputTuneData = function (event) {
