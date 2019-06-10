@@ -71,6 +71,7 @@ let tuneId = 0
 
 const onClickNew = function (event) {
   event.preventDefault()
+  $('#new-tune-message').html('Create a tune')
   const input = getFormFields(this)
   console.log('input is', input)
   tuneData.tune.title = input.title
@@ -79,12 +80,14 @@ const onClickNew = function (event) {
   if (store.tunes.some((storeTune) => {
     return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
   })) {
-    alert('Duplicate Found')
+    $('#new-tune-message').html('No Duplicates!')
   } else {
     api.createTune(tuneData)
       .then(() => console.log('Created a tune!'))
+      .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
       .then(ui.showTunes)
+      .catch(() => $('#new-tune-message').html('Failure'))
   }
 }
 
@@ -99,12 +102,14 @@ const onClickEditSubmit = function (event) {
     console.log('my rep is selected')
     api.patchTune(tuneId, patchTuneData)
       .then(onClickMyRepertoire)
+      .then(() => $('#edit-tune-message').html('Success'))
       .then(() => console.log('Patch success'))
-      .catch(() => console.log('Patch failed'))
+      .catch(() => $('#edit-tune-message').html('Failure'))
   }
 }
 
 const onClickEdit = function () {
+  $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
     console.log('Edit was clicked')
     for (let i = 1; i <= 5000; i++) {
