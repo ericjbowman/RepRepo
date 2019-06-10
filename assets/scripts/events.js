@@ -170,6 +170,7 @@ const addCheckedMasterTunes = function () {
     }
     api.createTune(tuneData)
       .then(() => console.log('Created a tune!'))
+      .then($('#add-success').modal('show'))
   }
 }
 
