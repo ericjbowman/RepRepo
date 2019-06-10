@@ -60,6 +60,7 @@ let tuneData = {
 }
 
 const onClickNew = function (event) {
+  event.preventDefault()
   const input = getFormFields(this)
   console.log('input is', input)
   tuneData.tune.title = input.title
@@ -107,13 +108,10 @@ const onClickActions = function (event) {
   $('#input-tune-data').on('submit', function (event) {
     event.preventDefault()
   })
-  $('#input-tune-data').on('submit', onClickNew)
-  $('.remove').on('click', deleteCheckedTunes)
-  $('#edit-tune-data').on('submit', onClickEdit)
-  // api.createTune(tuneData)
-  //   .then(() => console.log('Created a tune!'))
-  //   .then(api.indexTunes)
-  //   .then(ui.showTunes)
+  // $('#input-tune-data').on('submit', onClickNew)
+  // $('.remove').on('click', deleteCheckedTunes)
+  // $('#edit-tune-data').on('submit', onClickEdit)
+  // $('.actions').on('submit', '#input-tune-data', )
 }
 
 let checkedTunes = []
@@ -182,9 +180,10 @@ const addHandlers = () => {
   $('#my-rep').on('click', onClickMyRepertoire)
   $('#full-rep').on('click', ui.showMasterTunes)
   $('.add').on('click', addCheckedMasterTunes)
-  // $('.remove').on('click', deleteCheckedTunes)
+  $('.remove').on('click', deleteCheckedTunes)
   $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
-  $('.actions').on('click', onClickActions)
+  // $('.actions').on('click', onClickActions)
+  $('body').on('submit', '#input-tune-data', onClickNew)
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)
