@@ -176,6 +176,22 @@ const deleteCheckedTunes = function () {
   }
 }
 
+const findOurTunes = function () {
+  console.log('something is checked!!')
+  let checkedUserTunes = []
+  for (let i = 1; i <= 5000; i++) {
+    if ($(`#${i}`).prop('checked')) {
+      console.log('something is checked!!')
+      store.userList.users.forEach(user => {
+        if (user.id === i) {
+          checkedUserTunes.push(user.tunes)
+        }
+      })
+    }
+  }
+  console.log('checked user tunes is ', checkedUserTunes)
+}
+
 const onInputTuneData = function (event) {
   event.preventDefault()
   const newTuneData = getFormFields(this)
@@ -216,6 +232,8 @@ const addHandlers = () => {
   $('body').on('submit', '#input-tune-data', onClickNew)
   $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
   $('#our-rep').on('click', onClickOurRep)
+  $('.find-our-tunes').on('click', findOurTunes)
+
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)

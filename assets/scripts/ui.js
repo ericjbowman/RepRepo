@@ -69,13 +69,13 @@ const showTunes = function (data) {
 const showUsers = function (data) {
   let emailList = []
   store.userList = data
-  console.log('userList is', store.userList.users[4].email)
+  console.log('userList is', store.userList.users)
   store.userList.users.forEach(tune => emailList.push(tune.email))
   console.log('emailList is', emailList)
   let display = ''
-  emailList.forEach(email => {
+  store.userList.users.forEach(user => {
     display += `<div><label class="checkbox-inline">
-      <input type="checkbox" value="">${email}</label></div>`
+      <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
   })
   $('#log-message').html(`${display}`)
 }
