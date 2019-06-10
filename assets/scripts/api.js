@@ -85,6 +85,17 @@ const createTune = function (data) {
   })
 }
 
+const patchTune = function (i, tuneData) {
+  return $.ajax({
+    url: config.apiUrl + '/tunes/' + i,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: tuneData
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -94,5 +105,6 @@ module.exports = {
   indexTunes,
   showTune,
   deleteTune,
-  createTune
+  createTune,
+  patchTune
 }

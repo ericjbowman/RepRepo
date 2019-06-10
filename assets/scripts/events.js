@@ -70,19 +70,34 @@ const onClickNew = function (event) {
   })) {
     alert('Duplicate Found')
   } else {
-  // const input = getFormFields(this)
-  // console.log('input is', input)
-  // tuneData.tune.title = input.title
-  // tuneData.tune.composer = input.composer
-  // console.log('tune data is', tuneData)
-  // if (isDoneYet === false) {
-  api.createTune(tuneData)
-    .then(() => console.log('Created a tune!'))
-    .then(api.indexTunes)
-    .then(ui.showTunes)
+    api.createTune(tuneData)
+      .then(() => console.log('Created a tune!'))
+      .then(api.indexTunes)
+      .then(ui.showTunes)
   }
-      // .then(isDoneYet = true)
-  // }
+}
+
+const onClickEdit = function (event) {
+  const input = getFormFields(this)
+  console.log('input is', input)
+  tuneData.tune.title = input.title
+  tuneData.tune.composer = input.composer
+  console.log('tune data is', tuneData)
+  if ($('#my-rep').hasClass('selected')) {
+    // let deleteIds = []
+    for (let i = 1; i <= 5000; i++) {
+      if ($(`#${i}`).prop('checked')) {
+        console.log('checked tune is', $(`#${i}`).parent().text())
+        // deleteIds.push(i)
+        api.PatchTune(i, tuneData)
+          .then(onClickMyRepertoire)
+          .then(() => console.log('Patch success'))
+          .catch(() => console.log('Patch failed'))
+      }
+      break
+    }
+    // console.log('deleteIds are', deleteIds)
+  }
 }
 
 const onClickActions = function (event) {
@@ -94,6 +109,7 @@ const onClickActions = function (event) {
   })
   $('#input-tune-data').on('submit', onClickNew)
   $('.remove').on('click', deleteCheckedTunes)
+  $('#edit-tune-data').on('submit', onClickEdit)
   // api.createTune(tuneData)
   //   .then(() => console.log('Created a tune!'))
   //   .then(api.indexTunes)
@@ -157,9 +173,6 @@ const onInputTuneData = function (event) {
 // const modsubmit = function (event) {
 //   event.preventDefault()
 // }
-const onClickEdit = function (event) {
-  event.preventDefault()
-}
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
