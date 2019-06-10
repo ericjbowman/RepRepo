@@ -2,7 +2,7 @@ const store = require('./store')
 const api = require('./api')
 
 const signUpSuccess = function (data) {
-  $('#log-message').html('Signed up!')
+  $('.step-one').html('Sign-up success')
   $('form').trigger('reset')
 }
 
@@ -52,6 +52,14 @@ const signInSuccess = function (data) {
     // .then(() => $('#log-message').html(`${store.masterTunes[0].title}`))
     .then(showMasterTunes)
     // .catch($('#log-message').append(' Index failed!'))
+}
+
+const signInFailure = function () {
+  $('.step-one').html('Sign-in failed')
+}
+
+const signUpFailure = function () {
+  $('.step-one').html('Sign-up failed')
 }
 
 const showTunes = function (data) {
@@ -133,6 +141,8 @@ module.exports = {
   signInSuccess,
   signUpSuccess,
   signOutSuccess,
+  signUpFailure,
+  signInFailure,
   changePasswordSuccess,
   changePasswordFailure,
   showMasterTunes,
