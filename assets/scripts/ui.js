@@ -37,6 +37,8 @@ const signInSuccess = function (data) {
   $('#full-rep').addClass('selected')
   $('.actions').removeClass('disappear')
   store.user = data.user
+  store.user_id = data.user.id
+  console.log('user id is', store.user_id)
   console.log('store.user is', store.user)
   // $('#log-message').html('Signed in!')
   api.indexMasterTunes()

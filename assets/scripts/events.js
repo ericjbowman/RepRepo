@@ -63,7 +63,7 @@ let patchTuneData = {
   tune: {
     title: 'Sample',
     composer: 'Dr. Ebow',
-    user_id: 5
+    user_id: store.user_id
   }
 }
 
@@ -117,18 +117,18 @@ const onClickEdit = function () {
   }
 }
 
-const onClickActions = function (event) {
-  $('#edit-tune-data').on('submit', function (event) {
-    event.preventDefault()
-  })
-  $('#input-tune-data').on('submit', function (event) {
-    event.preventDefault()
-  })
-  // $('#input-tune-data').on('submit', onClickNew)
-  // $('.remove').on('click', deleteCheckedTunes)
-  // $('#edit-tune-data').on('submit', onClickEdit)
-  // $('.actions').on('submit', '#input-tune-data', )
-}
+// const onClickActions = function (event) {
+//   $('#edit-tune-data').on('submit', function (event) {
+//     event.preventDefault()
+//   })
+//   $('#input-tune-data').on('submit', function (event) {
+//     event.preventDefault()
+//   })
+//   // $('#input-tune-data').on('submit', onClickNew)
+//   // $('.remove').on('click', deleteCheckedTunes)
+//   // $('#edit-tune-data').on('submit', onClickEdit)
+//   // $('.actions').on('submit', '#input-tune-data', )
+// }
 
 let checkedTunes = []
 const addCheckedMasterTunes = function () {
