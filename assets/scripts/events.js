@@ -59,6 +59,16 @@ let tuneData = {
   }
 }
 
+let patchTuneData = {
+  tune: {
+    title: 'Sample',
+    composer: 'Dr. Ebow',
+    user_id: 5
+  }
+}
+
+let tuneId = 0
+
 const onClickNew = function (event) {
   event.preventDefault()
   const input = getFormFields(this)
@@ -78,26 +88,32 @@ const onClickNew = function (event) {
   }
 }
 
-const onClickEdit = function (event) {
+const onClickEditSubmit = function (event) {
+  event.preventDefault()
   const input = getFormFields(this)
   console.log('input is', input)
-  tuneData.tune.title = input.title
-  tuneData.tune.composer = input.composer
-  console.log('tune data is', tuneData)
+  patchTuneData.tune.title = input.title
+  patchTuneData.tune.composer = input.composer
+  console.log('patchTuneData is', patchTuneData)
   if ($('#my-rep').hasClass('selected')) {
-    // let deleteIds = []
+    console.log('my rep is selected')
+    api.patchTune(tuneId, patchTuneData)
+      .then(onClickMyRepertoire)
+      .then(() => console.log('Patch success'))
+      .catch(() => console.log('Patch failed'))
+  }
+}
+
+const onClickEdit = function () {
+  if ($('#my-rep').hasClass('selected')) {
+    console.log('Edit was clicked')
     for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
         console.log('checked tune is', $(`#${i}`).parent().text())
-        // deleteIds.push(i)
-        api.PatchTune(i, tuneData)
-          .then(onClickMyRepertoire)
-          .then(() => console.log('Patch success'))
-          .catch(() => console.log('Patch failed'))
+        tuneId = i
+        console.log('tune Id is', tuneId)
       }
-      break
     }
-    // console.log('deleteIds are', deleteIds)
   }
 }
 
@@ -148,7 +164,6 @@ const addCheckedMasterTunes = function () {
 
 const deleteCheckedTunes = function () {
   if ($('#my-rep').hasClass('selected')) {
-    // let deleteIds = []
     for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
         console.log('checked tune is', $(`#${i}`).parent().text())
@@ -158,7 +173,6 @@ const deleteCheckedTunes = function () {
           .catch(() => console.log('Delete failed'))
       }
     }
-    // console.log('deleteIds are', deleteIds)
   }
 }
 
@@ -182,8 +196,10 @@ const addHandlers = () => {
   $('.add').on('click', addCheckedMasterTunes)
   $('.remove').on('click', deleteCheckedTunes)
   $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
-  // $('.actions').on('click', onClickActions)
+  // $('body').on('click', '.edit', onClickEdit)
+  $('.edit').on('click', onClickEdit)
   $('body').on('submit', '#input-tune-data', onClickNew)
+  $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)
