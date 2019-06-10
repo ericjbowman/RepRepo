@@ -192,6 +192,7 @@ const findCommonTunes = function () {
 }
 
 const findOurTunes = function () {
+  checkedUserTunes = []
   console.log('something is checked!!')
   // let checkedUserTunes = []
   for (let i = 1; i <= 5000; i++) {
