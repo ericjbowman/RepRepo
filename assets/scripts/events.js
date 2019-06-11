@@ -195,7 +195,6 @@ const findCommonTunes = function () {
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
   console.log('flattened user tunes is', flattenedUserTunes)
   let combinedTunes = []
-  let flattenedCombinedTunes = [...new Set(combinedTunes)]
   flattenedUserTunes.forEach((tune) => {
     let counter = 0
     // console.log('counter is', counter)
@@ -218,7 +217,8 @@ const findCommonTunes = function () {
   combinedTunes.forEach(tune => combinedComposers.push(tune.composer))
   let combinedUniqueTitles = [...new Set(combinedTitles)]
   let combinedUniqueComposers = [...new Set(combinedComposers)]
-  console.log('combined titles is', combinedTitles)
+  // If there are duplicate composers, combinedUniqueComposers will come up short.
+  // Use the Id of the tunes to get the composer in the ui
   ui.showCombinedTunes(combinedUniqueTitles, combinedUniqueComposers)
 }
 
