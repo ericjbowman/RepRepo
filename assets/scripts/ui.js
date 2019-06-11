@@ -106,7 +106,7 @@ const showUsers = function (data) {
   console.log('userList is', store.userList.users)
   store.userList.users.forEach(tune => emailList.push(tune.email))
   console.log('emailList is', emailList)
-  let display = '<h6>Choose Users:</h6>'
+  let display = '<p class="user-search"</p><h6>Choose Users:</h6>'
   store.userList.users.forEach(user => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`

@@ -187,13 +187,14 @@ const deleteCheckedTunes = function () {
   }
 }
 let checkedUserTunes = []
+let combinedTunes = []
 const findCommonTunes = function () {
   let numOfCheckedUsers = checkedUserTunes.length
   console.log('number of checked users is', numOfCheckedUsers)
   console.log('second checked user tunes is', checkedUserTunes[1])
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
   console.log('flattened user tunes is', flattenedUserTunes)
-  let combinedTunes = []
+  // let combinedTunes = []
   for (let i = 0; i < flattenedUserTunes.length; i++) {
     let counter = 0
     // console.log('counter is', counter)
@@ -315,12 +316,12 @@ const onClickSearch = function (event, tuneArray) {
     // console.log('getFormFields', getFormFields(this))
     console.log(searchTuneData.credentials.search)
     store.userList.users.forEach((user) => {
-      if (user.email.includes(searchField)) {
+      if ((user.email.includes(searchField) || (searchField.includes(user.email)))) {
         display += `<div><label class="checkbox-inline">
           <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
       }
     })
-    $('#log-message').html(`${display}`)
+    $('.user-search').html(`${display}`)
     $('#search-message').text('Search results for: ' + searchField)
 
 // store.userList.users.email
