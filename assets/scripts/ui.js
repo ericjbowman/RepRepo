@@ -80,7 +80,7 @@ const showTunes = function (data) {
 }
 
 const showCombinedTunes = function (combinedTunes) {
-  let display = ''
+  let display = `<h6>${combinedTunes.length} tunes:</h6>`
   for (let i = 0; i < combinedTunes.length; i++) {
     display += `<div id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</div>`
   }
