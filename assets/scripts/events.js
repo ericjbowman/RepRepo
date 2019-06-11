@@ -219,7 +219,7 @@ const findCommonTunes = function () {
   let combinedUniqueComposers = [...new Set(combinedComposers)]
   // If there are duplicate composers, combinedUniqueComposers will come up short.
   // Use the Id of the tunes to get the composer in the ui
-  ui.showCombinedTunes(combinedUniqueTitles, combinedUniqueComposers)
+  ui.showCombinedTunes(combinedTunes)
 }
 
 const findOurTunes = function () {
