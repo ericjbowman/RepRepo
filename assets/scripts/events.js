@@ -188,16 +188,28 @@ const deleteCheckedTunes = function () {
   }
 }
 let checkedUserTunes = []
-
 const findCommonTunes = function () {
+  let numOfCheckedUsers = checkedUserTunes.length
+  console.log('number of checked users is', numOfCheckedUsers)
   console.log('second checked user tunes is', checkedUserTunes[1])
+  const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
+  console.log('flattened user tunes is', flattenedUserTunes)
   let combinedTunes = []
-  for (let i = 0; i < checkedUserTunes[0].length; i++) {
-    checkedUserTunes[1].forEach(tune => {
-      if (tune.title === checkedUserTunes[0][i].title) {
-        combinedTunes.push(tune)
+  for (let i = 0; i < flattenedUserTunes.length; i++) {
+    let counter = 0
+    console.log('counter is', counter)
+    console.log('i is', i)
+    if (i === 2) {console.log('we reached 2')}
+    for (let j = 0; i < flattenedUserTunes.length; i++) {
+      if (flattenedUserTunes[i].title === flattenedUserTunes[j].title) {
+        counter++
+        console.log('match found!', flattenedUserTunes[i], counter)
+        if (counter === numOfCheckedUsers) {
+          combinedTunes.push(flattenedUserTunes[i])
+          console.log('pushed tune is', flattenedUserTunes[i])
+        }
       }
-    })
+    }
   }
   console.log('combined tunes are', combinedTunes)
   ui.showCombinedTunes(combinedTunes)
