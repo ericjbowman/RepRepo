@@ -78,12 +78,12 @@ const showTunes = function (data) {
   $('#my-rep').addClass('selected')
 }
 
-const showCombinedTunes = function (combinedTunes) {
+const showCombinedTunes = function (combinedUniqueTitles, combinedUniqueComposers) {
   let display = ''
-  combinedTunes.forEach(tune => {
+  for (let i = 0; i < combinedUniqueTitles.length; i++) {
     display += `<div><label class="checkbox-inline">
-      <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
-  })
+      <input type="checkbox" value="" id=${i}> ${combinedUniqueTitles[i]}, ${combinedUniqueComposers[i]}</label></div>`
+  }
   $('#log-message').html(`${display}`)
 }
 
