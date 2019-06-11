@@ -195,21 +195,21 @@ const findCommonTunes = function () {
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
   console.log('flattened user tunes is', flattenedUserTunes)
   let combinedTunes = []
-  flattenedUserTunes.forEach((tune) => {
+  for (let i = 0; i < flattenedUserTunes.length; i++) {
     let counter = 0
     // console.log('counter is', counter)
-    for (let j = 0; j < flattenedUserTunes.length; j++) {
+    for (let j = i; j < flattenedUserTunes.length; j++) {
       // let counter = 0
-      if (tune.title === flattenedUserTunes[j].title) {
+      if (flattenedUserTunes[i].title === flattenedUserTunes[j].title) {
         counter++
         console.log('match found!', counter)
         if (counter === numOfCheckedUsers) {
-          combinedTunes.push(tune)
-          console.log('pushed tune is', tune)
+          combinedTunes.push(flattenedUserTunes[i])
+          console.log('pushed tune is', flattenedUserTunes[i])
         }
       }
     }
-  })
+  }
   console.log('combined tunes are', combinedTunes)
   let combinedTitles = []
   let combinedComposers = []

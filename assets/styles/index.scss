@@ -18,7 +18,7 @@ nav {
 }
 
 .selected {
-  color: green;
+  color: Green;
 }
 
 footer {
@@ -31,7 +31,7 @@ footer {
   justify-content: space-around;
   position: fixed;
   bottom: 0;
-  background-color: green;
+  background-color: Green;
   color: white;
 }
 
@@ -52,7 +52,7 @@ footer {
 }
 
 .reps:hover {
-  color: green;
+  color: Green;
 }
 
 .account-line {
@@ -172,7 +172,7 @@ h4::before, h4::after {
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: green;
+  background-color: Green;
   transform: scaleY(0);
   transition: transform 0.5s ease;
 }
