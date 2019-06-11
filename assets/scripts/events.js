@@ -211,12 +211,12 @@ const findCommonTunes = function () {
     }
   }
   console.log('combined tunes are', combinedTunes)
-  let combinedTitles = []
-  let combinedComposers = []
-  combinedTunes.forEach(tune => combinedTitles.push(tune.title))
-  combinedTunes.forEach(tune => combinedComposers.push(tune.composer))
-  let combinedUniqueTitles = [...new Set(combinedTitles)]
-  let combinedUniqueComposers = [...new Set(combinedComposers)]
+  // let combinedTitles = []
+  // let combinedComposers = []
+  // combinedTunes.forEach(tune => combinedTitles.push(tune.title))
+  // combinedTunes.forEach(tune => combinedComposers.push(tune.composer))
+  // let combinedUniqueTitles = [...new Set(combinedTitles)]
+  // let combinedUniqueComposers = [...new Set(combinedComposers)]
   // If there are duplicate composers, combinedUniqueComposers will come up short.
   // Use the Id of the tunes to get the composer in the ui
   ui.showCombinedTunes(combinedTunes)
@@ -258,7 +258,7 @@ const onClickOurRep = function () {
   $('.shared').removeClass('disappear')
   $('.add').addClass('disappear')
   $('.remove').addClass('disappear')
-    $('.edit').addClass('disappear')
+  $('.edit').addClass('disappear')
   // $('.add').removeClass('add')
   // $('.add').addClass('shared')
   // $('.shared').on('click', findOurTunes)

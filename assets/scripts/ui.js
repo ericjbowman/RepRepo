@@ -7,7 +7,7 @@ const signUpSuccess = function (data) {
 }
 
 const showMasterTunes = function () {
-  let display = ''
+  let display = '<h6>Jazz Standards:</h6>'
   store.masterTunes.forEach(tune => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
@@ -67,12 +67,13 @@ const showTunes = function (data) {
   let userTunes = []
   userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   console.log('store.tunes is', userTunes)
-  let display = ''
+  let display = `<h6>   ${userTunes.length} tunes:</h6>`
   userTunes.forEach(tune => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
   })
   $('#log-message').html(`${display}`)
+  console.log('display is ', display)
   $('#full-rep').removeClass('selected')
   $('#our-rep').removeClass('selected')
   $('#my-rep').addClass('selected')
@@ -81,8 +82,7 @@ const showTunes = function (data) {
 const showCombinedTunes = function (combinedTunes) {
   let display = ''
   for (let i = 0; i < combinedTunes.length; i++) {
-    display += `<div><label class="checkbox-inline">
-      <input type="checkbox" value="" id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</label></div>`
+    display += `<div id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</div>`
   }
   $('#log-message').html(`${display}`)
 }
@@ -90,12 +90,13 @@ const showCombinedTunes = function (combinedTunes) {
 const showUsers = function (data) {
   $('#our-rep').addClass('selected')
   $('#my-rep').removeClass('selected')
+  $('#full-rep').removeClass('selected')
   let emailList = []
   store.userList = data
   console.log('userList is', store.userList.users)
   store.userList.users.forEach(tune => emailList.push(tune.email))
   console.log('emailList is', emailList)
-  let display = ''
+  let display = '<h6>Choose Users:</h6>'
   store.userList.users.forEach(user => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`

@@ -13,7 +13,7 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <nav>
+      <nav id="top-nav">
         <div class="app-name">RepRepo</div>
         <form class="form-inline my-2 my-lg-0 search-bar">
           <input class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search">
@@ -45,12 +45,12 @@
             </div>
           </div>
           <!-- <form id="sign-out" class="disappear">
-            <input type="submit" value="Sign out" class="btn btn-success">
+            <input type="submit" value="Sign out" class="btn">
           </form> -->
         </div>
       </nav>
       <div class="list-choice container-fluid">
-        <h3 class="step-one">Sign in to access repertoire</h4>
+        <h3 class="step-one">Welcome to Repertoire Repository!</h3>
         <h4 id="full-rep" class="reps">Full Repertoire</h4>
         <h4 id="my-rep" class="reps">My Repertoire</h4>
         <h4 id="our-rep" class="reps">Our Repertoire</h4>
@@ -95,12 +95,12 @@
                 <form id="edit-tune-data">
                   <input type="text" name="title" placeholder="Title">
                   <input type="text" name="composer" placeholder="Composer">
-                  <input type="submit" value="Edit" class="btn btn-success">
+                  <input type="submit" value="Edit" class="btn">
                 </form>
               </div>
               <div class="modal-footer">
                 <p class="onEditTuneInput"><p>
-                <button type="button" class="btn btn-block btn-success cls" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success btn-block cls" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@
               </div>
               <div class="modal-footer">
                 <p class="onNewTuneInput"><p>
-                <button type="button" class="btn btn-block btn-success cls" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success btn-block cls" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -130,7 +130,7 @@
             <div class="modal-content">
               <div class="modal-body">
                 <h3 id="add-success-message">Success!</h3>
-                <button type="button" class="btn btn-block btn-success cls" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success btn-block cls" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@
     <ul class="navbar-nav">
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-success btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <li class="nav-item">
         <a class="nav-link" href="#">Account</a>

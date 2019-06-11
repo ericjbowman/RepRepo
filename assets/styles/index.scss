@@ -1,9 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 
 $navdark: #343a40;
+$purp: #8f00c4;
+$dark-purp: #7700a3;
 
-nav {
-  // height: 4em;
+body {
+  background-color: #eff3f7;
+}
+
+#top-nav {
+  height: fixed;
   @extend .navbar;
   @extend .navbar-dark;
   @extend .bg-dark;
@@ -18,7 +24,7 @@ nav {
 }
 
 .selected {
-  color: Green;
+  color: green;
 }
 
 footer {
@@ -31,7 +37,7 @@ footer {
   justify-content: space-around;
   position: fixed;
   bottom: 0;
-  background-color: Green;
+  background-color: green;
   color: white;
 }
 
@@ -52,7 +58,7 @@ footer {
 }
 
 .reps:hover {
-  color: Green;
+  color: green;
 }
 
 .account-line {
@@ -72,7 +78,7 @@ footer {
 }
 
 .list-choice {
-  margin-top: 4.5em;
+  margin-top: 4.8em;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -172,7 +178,7 @@ h4::before, h4::after {
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: Green;
+  background-color: green;
   transform: scaleY(0);
   transition: transform 0.5s ease;
 }
