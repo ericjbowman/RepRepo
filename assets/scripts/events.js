@@ -308,7 +308,21 @@ const onClickSearch = function (event, tuneArray) {
     })
     searchTunes(tunes)
   } else if ($('#our-rep').hasClass('selected')) {
-    searchTunes(store.tunes)
+    $('#search').trigger('reset')
+    const searchField = searchTuneData.credentials.search
+    console.log('search tunes was clicked')
+    let display = `<h6 id="search-message"></h6>`
+    // console.log('getFormFields', getFormFields(this))
+    console.log(searchTuneData.credentials.search)
+    store.userList.users.forEach((user) => {
+      if (user.email.includes(searchField)) {
+        display += `<div><label class="checkbox-inline">
+          <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
+      }
+    })
+    $('#log-message').html(`${display}`)
+    $('#search-message').text('Search results for: ' + searchField)
+
 // store.userList.users.email
   }
 }
