@@ -280,7 +280,7 @@ const searchTunes = function (tuneArray) {
   $('#search').trigger('reset')
   const searchField = searchTuneData.credentials.search
   console.log('search tunes was clicked')
-  let display = `<h6>Search results for: ${searchField}</h6>`
+  let display = `<h6 id="search-message"></h6>`
   // console.log('getFormFields', getFormFields(this))
   console.log(searchTuneData.credentials.search)
   tuneArray.forEach((tune) => {
@@ -290,6 +290,7 @@ const searchTunes = function (tuneArray) {
     }
   })
   $('#log-message').html(`${display}`)
+  $('#search-message').text('Search results for: ' + searchField)
 }
 
 const onClickSearch = function (event, tuneArray) {
