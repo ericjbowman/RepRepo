@@ -66,14 +66,18 @@ const showTunes = function (data) {
   store.tunes = data.tunes
   let userTunes = []
   userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-  console.log('store.tunes is', userTunes)
-  let display = `<h6>   ${userTunes.length} tunes:</h6>`
-  userTunes.forEach(tune => {
+  console.log('userTunes is', userTunes)
+  let display = `<h6>${userTunes.length} tunes:</h6>`
+  for (let i = 0; i < userTunes.length; i++) {
     display += `<div><label class="checkbox-inline">
-      <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
-  })
+      <input type="checkbox" value="" id=${userTunes[i].id}></label><span class=${i}></p></div>`
+    // console.log(i)
+  }
   $('#log-message').html(`${display}`)
-  console.log('display is ', display)
+  for (let i = 0; i < userTunes.length; i++) {
+    $(`.${i}`).text(' ' + userTunes[i].title + ', ' + userTunes[i].composer)
+    // console.log('second loop i is', i)
+  }
   $('#full-rep').removeClass('selected')
   $('#our-rep').removeClass('selected')
   $('#my-rep').addClass('selected')

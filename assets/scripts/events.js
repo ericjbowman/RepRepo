@@ -90,6 +90,7 @@ const onClickNew = function (event) {
       .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
       .then(ui.showTunes)
+      .then(onClickMyRepertoire)
       .then(() => $('form').trigger('reset'))
       .catch(() => $('#new-tune-message').html('Failure'))
   }
