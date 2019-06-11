@@ -73,18 +73,17 @@ let tuneId = 0
 
 const onClickNew = function (event) {
   if ($('#my-rep').hasClass('selected')) {
-  event.preventDefault()
-  $('#new-tune-message').html('Create a tune')
-  const input = getFormFields(this)
-  console.log('input is', input)
-  tuneData.tune.title = input.title
-  tuneData.tune.composer = input.composer
-  console.log('tune data is', tuneData)
-  if (store.tunes.some((storeTune) => {
-    return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
-  })) {
-    $('#new-tune-message').html('No Duplicates!')
-  } else {
+    event.preventDefault()
+    $('#new-tune-message').html('Create a tune')
+    const input = getFormFields(this)
+    console.log('input is', input)
+    tuneData.tune.title = input.title
+    tuneData.tune.composer = input.composer
+    console.log('tune data is', tuneData)
+  // if (store.tunes.some((storeTune) => {
+  //   return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
+  // })) {
+  //   $('#new-tune-message').html('No Duplicates!')
     api.createTune(tuneData)
       .then(() => console.log('Created a tune!'))
       .then(() => $('#new-tune-message').html('Success'))
@@ -94,7 +93,6 @@ const onClickNew = function (event) {
       .then(() => $('form').trigger('reset'))
       .catch(() => $('#new-tune-message').html('Failure'))
   }
-}
 }
 
 const onClickEditSubmit = function (event) {
@@ -273,6 +271,47 @@ const onClickOurRep = function () {
     // .then(ui.showUsers)
 }
 
+let searchTuneData = {}
+
+const searchTunes = function (tuneArray) {
+  console.log(tuneArray)
+  // event.preventDefault()
+  // const searchTuneData = getFormFields(this)
+  $('#search').trigger('reset')
+  const searchField = searchTuneData.credentials.search
+  console.log('search tunes was clicked')
+  let display = `<h6>Search results for: ${searchField}</h6>`
+  // console.log('getFormFields', getFormFields(this))
+  console.log(searchTuneData.credentials.search)
+  tuneArray.forEach((tune) => {
+    if ((tune.title.includes(searchField)) || (tune.composer.includes(searchField))) {
+      display += `<div><label class="checkbox-inline">
+      <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
+    }
+  })
+  $('#log-message').html(`${display}`)
+}
+
+const onClickSearch = function (event, tuneArray) {
+  event.preventDefault()
+  searchTuneData = getFormFields(this)
+  if ($('#full-rep').hasClass('selected')) {
+    searchTunes(store.masterTunes)
+    console.log('my rep selected')
+  } else if ($('#my-rep').hasClass('selected')) {
+    const tunes = []
+    store.tunes.forEach((tune) => {
+      if (tune.user.id === store.user.id) {
+        tunes.push(tune)
+      }
+    })
+    searchTunes(tunes)
+  } else if ($('#our-rep').hasClass('selected')) {
+    searchTunes(store.tunes)
+// store.userList.users.email
+  }
+}
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -290,6 +329,8 @@ const addHandlers = () => {
   $('body').on('click', '.shared', findOurTunes)
   $('#our-rep').on('click', onClickOurRep)
   $('.find-our-tunes').on('click', findOurTunes)
+  // $('body').on('submit', '#search', searchTunes)
+  $('#search').on('submit', onClickSearch)
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)
