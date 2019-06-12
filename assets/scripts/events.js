@@ -88,6 +88,10 @@ const onClickNew = function (event) {
   //   return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
   // })) {
   //   $('#new-tune-message').html('No Duplicates!')
+  let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+  if (userTunes.every((tune) => {
+    return (tune.title !== tuneData.tune.title) && (tune.composer !== tuneData.tune.composer)
+  })) {
     api.createTune(tuneData)
       .then(() => console.log('Created a tune!'))
       .then(() => $('#new-tune-message').html('Success'))
@@ -97,6 +101,9 @@ const onClickNew = function (event) {
       .then(onClickMyRepertoire)
       .then(() => $('form').trigger('reset'))
       .catch(() => $('#new-tune-message').html('Failure'))
+    } else {
+      $('#new-tune-message').html('That tune already exists!')
+    }
   }
 }
 
@@ -144,7 +151,6 @@ const onClickEdit = function () {
 //   // $('#edit-tune-data').on('submit', onClickEdit)
 //   // $('.actions').on('submit', '#input-tune-data', )
 // }
-
 let checkedTunes = []
 const addCheckedMasterTunes = function () {
   checkedTunes = []
@@ -179,7 +185,11 @@ const addCheckedMasterTunes = function () {
       api.createTune(tuneData)
         .then(deleteCheckedTunes)
         .then(() => console.log('Created a tune!'))
-        .then($('#add-success').modal('show'))
+      $('#add-success-message').html('Success!')
+      $('#add-success').modal('show')
+    } else {
+      $('#add-success-message').html('Choose New Tunes!')
+      $('#add-success').modal('show')
     }
   }
 }
