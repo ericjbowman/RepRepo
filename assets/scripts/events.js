@@ -116,12 +116,20 @@ const onClickEditSubmit = function (event) {
   console.log('patchTuneData is', patchTuneData)
   if ($('#my-rep').hasClass('selected')) {
     console.log('my rep is selected')
-    api.patchTune(tuneId, patchTuneData)
-      .then(onClickMyRepertoire)
-      .then(() => $('#edit-tune-message').html('Success'))
-      .then(() => console.log('Patch success'))
-      .then(() => $('form').trigger('reset'))
-      .catch(() => $('#edit-tune-message').html('Failure'))
+    let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+    if (userTunes.every((tune) => {
+      return (tune.title !== patchTuneData.tune.title) && (tune.composer !== patchTuneData.tune.composer)
+    })) {
+      api.patchTune(tuneId, patchTuneData)
+        .then(onClickMyRepertoire)
+        .then(() => $('#edit-tune-message').html('Success'))
+        .then(() => console.log('Patch success'))
+        .then(() => $('form').trigger('reset'))
+        .catch(() => $('#edit-tune-message').html('Failure'))
+    } else {
+      $('#edit-tune-message').html('That Tune Already Exists')
+      $('form').trigger('reset')
+    }
   }
 }
 
