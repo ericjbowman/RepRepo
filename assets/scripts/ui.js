@@ -80,13 +80,13 @@ const showTunes = function (data) {
     }
     return 0
   })
-  for (let i = 0; i < userTunes.length; i++) {
-    for (let j = 0; j < userTunes.length; j++) {
-      if (userTunes[i].title === userTunes[j].title) {
-        userTunes.splice(i, 1)
-      }
-    }
-  }
+  // for (let i = 0; i < userTunes.length; i++) {
+  //   for (let j = 0; j < userTunes.length; j++) {
+  //     if (userTunes[i].title === userTunes[j].title) {
+  //       userTunes.splice(i, 1)
+  //     }
+  //   }
+  // }
   // Would filter work without being able to access the next element using i?
   // userTunes.filter((tune) => {
   //   tune.title
