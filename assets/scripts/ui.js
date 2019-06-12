@@ -25,6 +25,7 @@ const showMasterTunes = function () {
   $('.add').removeClass('disappear')
   $('#image').addClass('disappear')
   $('#search').removeClass('disappear')
+  $('#search-results').addClass('disappear')
   // $('#2').addClass('selected')
 }
 
@@ -107,9 +108,11 @@ const showTunes = function (data) {
   $('#my-rep').addClass('selected')
   $('#image').addClass('disappear')
   $('#search').removeClass('disappear')
+  $('#search-results').addClass('disappear')
 }
 
 const showCombinedTunes = function (combinedTunes) {
+  $('#search-results').addClass('disappear')
   // $('#search').addClass('disappear')
   let display = `<h6>${combinedTunes.length} tunes:</h6>`
   for (let i = 0; i < combinedTunes.length; i++) {
@@ -122,6 +125,7 @@ const showCombinedTunes = function (combinedTunes) {
 }
 
 const showUsers = function (data) {
+  $('#search-results').addClass('disappear')
   $('#image').addClass('disappear')
   $('#our-rep').addClass('selected')
   $('#my-rep').removeClass('selected')
@@ -153,6 +157,7 @@ const showUsers = function (data) {
 }
 
 const signOutSuccess = function () {
+  $('#search-results').addClass('disappear')
   $('#image').addClass('disappear')
   $('#dropdownMenu2').addClass('disappear')
   $('list-choice').hide()

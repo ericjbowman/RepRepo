@@ -322,6 +322,7 @@ const onClickSearch = function (event, tuneArray) {
     searchTunes(tunes)
   } else if ($('#our-rep').hasClass('selected') && isUsers === true) {
     $('#search').trigger('reset')
+    $('#search-results').removeClass('disappear')
     const searchField = searchTuneData.credentials.search
     console.log('search tunes was clicked')
     let display = `<h6 id="search-message"></h6>`
@@ -333,22 +334,22 @@ const onClickSearch = function (event, tuneArray) {
           <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
       }
     })
-    $('.user-search').html(`${display}`)
+    $('#search-results').html(`${display}`)
     $('#search-message').text('Search results for: ' + searchField)
   } else if ($('#our-rep').hasClass('selected') && isUsers === false) {
     $('#search').trigger('reset')
+    $('#search-results').removeClass('disappear')
     const searchField = searchTuneData.credentials.search
     console.log('search tunes was clicked')
     let display = `<h6 id="search-message"></h6>`
     // console.log('getFormFields', getFormFields(this))
     console.log(searchTuneData.credentials.search)
-    store.userList.users.forEach((user) => {
-      if (((combinedTunes.title.toUpperCase().includes(searchField.toUpperCase())) || (combinedTunes.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(combinedTunes.title.toUpperCase())) || (searchField.toUpperCase().includes(combinedTunes.composer.toUpperCase())))) {
-        display += `<div><label class="checkbox-inline">
-        <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
+    combinedTunes.forEach((tune) => {
+      if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
+        display += `<div><span>${tune.title}, ${tune.composer}</span></div>`
       }
     })
-    $('.user-search').html(`${display}`)
+    $('#search-results').html(`${display}`)
     $('#search-message').text('Search results for: ' + searchField)
   }
 }
