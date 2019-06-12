@@ -55,6 +55,10 @@ const signInSuccess = function (data) {
     // .then(() => $('#log-message').html(`${store.masterTunes[0].title}`))
     .then(showMasterTunes)
     // .catch($('#log-message').append(' Index failed!'))
+  api.indexTunes()
+    .then((index) => {
+      store.tunes = index.tunes
+    })
 }
 
 const signInFailure = function () {
@@ -65,8 +69,8 @@ const signUpFailure = function () {
   $('.step-one').html('Sign-up failed')
 }
 
-const showTunes = function () {
-  // store.tunes = data.tunes
+const showTunes = function (data) {
+  store.tunes = data.tunes
   let userTunes = []
   userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   userTunes.sort(function (a, b) {

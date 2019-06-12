@@ -51,7 +51,6 @@ const onClickMyRepertoire = function () {
   // $('.new').on('click', onClickNew)
   $('.new-tune-waiting').attr('id', 'new-tune')
   api.indexTunes()
-    .then(deleteDuplicatesForUserTunes)
     .then(ui.showTunes)
 }
 
@@ -93,7 +92,7 @@ const onClickNew = function (event) {
       .then(() => console.log('Created a tune!'))
       .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
-      .then(deleteDuplicatesForUserTunes)
+      // .then(deleteDuplicatesForUserTunes)
       .then(ui.showTunes)
       .then(onClickMyRepertoire)
       .then(() => $('form').trigger('reset'))
@@ -166,6 +165,7 @@ const addCheckedMasterTunes = function () {
   y.forEach((arr) => composers.push(arr[1]))
   console.log('titles', titles)
   console.log('composers', composers)
+  let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   for (let i = 0; i < titles.length; i++) {
     tuneData = {
       tune: {
@@ -173,10 +173,14 @@ const addCheckedMasterTunes = function () {
         composer: `${composers[i]}`
       }
     }
-    api.createTune(tuneData)
-      .then(deleteCheckedTunes)
-      .then(() => console.log('Created a tune!'))
-      .then($('#add-success').modal('show'))
+    if (userTunes.every((tune) => {
+      return (tune.title !== tuneData.tune.title) && (tune.composer !== tuneData.tune.composer)
+    })) {
+      api.createTune(tuneData)
+        .then(deleteCheckedTunes)
+        .then(() => console.log('Created a tune!'))
+        .then($('#add-success').modal('show'))
+    }
   }
 }
 
@@ -361,40 +365,40 @@ const onClickSearch = function (event, tuneArray) {
   }
 }
 
-const deleteDuplicatesForUserTunes = function (data) {
-  store.tunes = data.tunes
-  let dupArray = []
-  let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-  userTunes.sort(function (a, b) {
-    let nameA = a.title.toUpperCase()
-    let nameB = b.title.toUpperCase()
-    if (nameA < nameB) {
-      return -1
-    }
-    if (nameA > nameB) {
-      return 1
-    }
-    return 0
-  })
-  console.log('delete dup ran')
-  for (let i = 0; i < userTunes.length - 1; i++) {
-    console.log(userTunes[i])
-    if ((userTunes[i].title === userTunes[i + 1].title) && (userTunes[i].composer === userTunes[i + 1].composer)) {
-      console.log('duplicate found in user tunes', userTunes[i].title)
-      dupArray.push(i)
-      console.log('dupArray is', dupArray)
-      // api.deleteTune(userTunes[i].id)
-      //   .then(onClickMyRepertoire)
-    }
-  }
-
-  dupArray.forEach((indexOfDupe) => {
-    console.log(userTunes[indexOfDupe])
-    api.deleteTune(userTunes[indexOfDupe].id)
-      .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
-      .then(afterDelete)
-  })
-}
+// const deleteDuplicatesForUserTunes = function (data) {
+//   store.tunes = data.tunes
+//   let dupArray = []
+//   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+//   userTunes.sort(function (a, b) {
+//     let nameA = a.title.toUpperCase()
+//     let nameB = b.title.toUpperCase()
+//     if (nameA < nameB) {
+//       return -1
+//     }
+//     if (nameA > nameB) {
+//       return 1
+//     }
+//     return 0
+//   })
+//   console.log('delete dup ran')
+//   for (let i = 0; i < userTunes.length - 1; i++) {
+//     console.log(userTunes[i])
+//     if ((userTunes[i].title === userTunes[i + 1].title) && (userTunes[i].composer === userTunes[i + 1].composer)) {
+//       console.log('duplicate found in user tunes', userTunes[i].title)
+//       dupArray.push(i)
+//       console.log('dupArray is', dupArray)
+//       // api.deleteTune(userTunes[i].id)
+//       //   .then(onClickMyRepertoire)
+//     }
+//   }
+//
+//   dupArray.forEach((indexOfDupe) => {
+//     console.log(userTunes[indexOfDupe])
+//     api.deleteTune(userTunes[indexOfDupe].id)
+//       .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
+//       .then(afterDelete)
+//   })
+// }
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
