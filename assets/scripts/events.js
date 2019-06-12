@@ -93,6 +93,7 @@ const onClickNew = function (event) {
       .then(() => console.log('Created a tune!'))
       .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
+      .then(deleteDuplicatesForUserTunes)
       .then(ui.showTunes)
       .then(onClickMyRepertoire)
       .then(() => $('form').trigger('reset'))
@@ -173,6 +174,7 @@ const addCheckedMasterTunes = function () {
       }
     }
     api.createTune(tuneData)
+      .then(deleteCheckedTunes)
       .then(() => console.log('Created a tune!'))
       .then($('#add-success').modal('show'))
   }
@@ -378,7 +380,7 @@ const deleteDuplicatesForUserTunes = function (data) {
   for (let i = 0; i < userTunes.length - 1; i++) {
     console.log(userTunes[i])
     if ((userTunes[i].title === userTunes[i + 1].title) && (userTunes[i].composer === userTunes[i + 1].composer)) {
-      console.log('duplicate found in user tunes')
+      console.log('duplicate found in user tunes', userTunes[i].title)
       dupArray.push(i)
       console.log('dupArray is', dupArray)
       // api.deleteTune(userTunes[i].id)
