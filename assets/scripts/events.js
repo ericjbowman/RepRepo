@@ -348,6 +348,8 @@ const addHandlers = () => {
   $('.find-our-tunes').on('click', findOurTunes)
   // $('body').on('submit', '#search', searchTunes)
   $('#search').on('submit', onClickSearch)
+  $('.reps').hide()
+  $('#search').addClass('disappear')
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)

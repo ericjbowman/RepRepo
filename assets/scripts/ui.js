@@ -24,13 +24,13 @@ const showMasterTunes = function () {
   $('.shared').addClass('disappear')
   $('.add').removeClass('disappear')
   $('#image').addClass('disappear')
+  $('#search').removeClass('disappear')
   // $('#2').addClass('selected')
 }
 
 const signInSuccess = function (data) {
   $('#dropdownMenu2').removeClass('disappear')
   $('list-choice').show()
-  $('#search').show()
   $('#search').removeClass('disappear')
   $('.reps').show()
   $('form').trigger('reset')
@@ -95,9 +95,11 @@ const showTunes = function (data) {
   $('#our-rep').removeClass('selected')
   $('#my-rep').addClass('selected')
   $('#image').addClass('disappear')
+  $('#search').removeClass('disappear')
 }
 
 const showCombinedTunes = function (combinedTunes) {
+  $('#search').addClass('disappear')
   let display = `<h6>${combinedTunes.length} tunes:</h6>`
   for (let i = 0; i < combinedTunes.length; i++) {
     display += `<div id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</div>`
@@ -113,6 +115,7 @@ const showUsers = function (data) {
   $('#our-rep').addClass('selected')
   $('#my-rep').removeClass('selected')
   $('#full-rep').removeClass('selected')
+  $('#search').removeClass('disappear')
   let emailList = []
   store.userList = data
   console.log('userList is', store.userList.users)
@@ -141,7 +144,6 @@ const showUsers = function (data) {
 const signOutSuccess = function () {
   $('#image').addClass('disappear')
   $('#dropdownMenu2').addClass('disappear')
-  $('.search').hide()
   $('list-choice').hide()
   $('.reps').hide()
   $('#sign-up').show()
@@ -154,7 +156,7 @@ const signOutSuccess = function () {
   $('.actions').addClass('disappear')
   $('.remove').removeClass('col-4')
   $('.edit').removeClass('col-4')
-  $('#search').hide()
+  $('#search').addClass('disappear')
   store.tunes = []
 }
 
