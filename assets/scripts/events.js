@@ -286,7 +286,7 @@ const searchTunes = function (tuneArray) {
   // console.log('getFormFields', getFormFields(this))
   console.log(searchTuneData.credentials.search)
   tuneArray.forEach((tune) => {
-    if (((tune.title.includes(searchField)) || (tune.composer.includes(searchField))) || ((searchField.includes(tune.title)) || (searchField.includes(tune.composer)))) {
+    if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
       display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
     }
@@ -317,7 +317,7 @@ const onClickSearch = function (event, tuneArray) {
     // console.log('getFormFields', getFormFields(this))
     console.log(searchTuneData.credentials.search)
     store.userList.users.forEach((user) => {
-      if ((user.email.includes(searchField) || (searchField.includes(user.email)))) {
+      if ((user.email.toUpperCase().includes(searchField.toUpperCase()) || (searchField.toUpperCase().includes(user.email.toUpperCase())))) {
         display += `<div><label class="checkbox-inline">
           <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
       }

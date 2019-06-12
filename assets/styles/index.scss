@@ -151,11 +151,11 @@ footer {
   margin-left: 20px;
 }
 
-span {
+.sp {
   position: relative;
 }
 
-span::before, span::after {
+.sp::before, .sp::after {
   content: '';
   position: absolute;
   top: 0;
@@ -166,22 +166,22 @@ span::before, span::after {
   transition: transform 0.5s ease;
 }
 
-span::before {
+.sp::before {
   left: -8px;
   transform-origin: center top;
 }
 
-span:hover::before {
+.sp:hover::before {
   transform-origin: center bottom;
   transform: scaleY(1);
 }
 
-span::after {
+.sp::after {
   right: -8px;
   transform-origin: center bottom;
 }
 
-span:hover::after {
+.sp:hover::after {
   transform-origin: center top;
   transform: scaleY(1);
 }
