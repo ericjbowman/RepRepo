@@ -76,9 +76,8 @@ let patchTuneData = {
 let tuneId = 0
 
 const onClickNew = function (event) {
+  event.preventDefault()
   if ($('#my-rep').hasClass('selected')) {
-    event.preventDefault()
-    $('#new-tune-message').html('Create a tune')
     const input = getFormFields(this)
     console.log('input is', input)
     tuneData.tune.title = input.title
@@ -103,6 +102,7 @@ const onClickNew = function (event) {
       .catch(() => $('#new-tune-message').html('Failure'))
     } else {
       $('#new-tune-message').html('That tune already exists!')
+      $('form').trigger('reset')
     }
   }
 }
@@ -431,6 +431,7 @@ const addHandlers = () => {
   $('#search').on('submit', onClickSearch)
   $('.reps').hide()
   $('#search').addClass('disappear')
+  $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)
