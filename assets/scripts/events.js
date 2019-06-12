@@ -161,6 +161,7 @@ const onClickEdit = function () {
 // }
 let checkedTunes = []
 const addCheckedMasterTunes = function () {
+  if ($('#full-rep').hasClass('selected')) {
   checkedTunes = []
   console.log('add was clicked')
   console.log('1 is', $('#1').html())
@@ -199,6 +200,7 @@ const addCheckedMasterTunes = function () {
       $('#add-success-message').html('Choose New Tunes!')
       $('#add-success').modal('show')
     }
+  }
   }
 }
 
