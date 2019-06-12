@@ -65,8 +65,8 @@ const signUpFailure = function () {
   $('.step-one').html('Sign-up failed')
 }
 
-const showTunes = function (data) {
-  store.tunes = data.tunes
+const showTunes = function () {
+  // store.tunes = data.tunes
   let userTunes = []
   userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   userTunes.sort(function (a, b) {
@@ -80,13 +80,13 @@ const showTunes = function (data) {
     }
     return 0
   })
-  // for (let i = 0; i < userTunes.length; i++) {
-  //   for (let j = 0; j < userTunes.length; j++) {
-  //     if (userTunes[i].title === userTunes[j].title) {
-  //       userTunes.splice(i, 1)
-  //     }
-  //   }
-  // }
+  for (let i = 0; i < userTunes.length; i++) {
+    for (let j = 0; j < userTunes.length; j++) {
+      if (userTunes[i].title === userTunes[j].title) {
+        userTunes.splice(i, 1)
+      }
+    }
+  }
   // Would filter work without being able to access the next element using i?
   // userTunes.filter((tune) => {
   //   tune.title

@@ -51,8 +51,8 @@ const onClickMyRepertoire = function () {
   // $('.new').on('click', onClickNew)
   $('.new-tune-waiting').attr('id', 'new-tune')
   api.indexTunes()
-    .then(ui.showTunes)
     .then(deleteDuplicatesForUserTunes)
+    .then(ui.showTunes)
 }
 
 let tuneData = {
@@ -355,9 +355,9 @@ const onClickSearch = function (event, tuneArray) {
   }
 }
 
-const deleteDuplicatesForUserTunes = function () {
-  // store.tunes = data.tunes
-  let dupArray =[]
+const deleteDuplicatesForUserTunes = function (data) {
+  store.tunes = data.tunes
+  let dupArray = []
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   userTunes.sort(function (a, b) {
     let nameA = a.title.toUpperCase()
@@ -371,23 +371,23 @@ const deleteDuplicatesForUserTunes = function () {
     return 0
   })
   console.log('delete dup ran')
-  for (let i = 0; i < userTunes.length; i++) {
+  for (let i = 0; i < userTunes.length - 1; i++) {
     console.log(userTunes[i])
-    for (let j = i + 1; j < userTunes.length; j++) {
-      if ((userTunes[i].title === userTunes[j].title) && (userTunes[i].composer === userTunes[j].composer)) {
-        console.log('duplicate found in user tunes')
-        dupArray.push(i)
-        console.log('dupArray is', dupArray)
-        // api.deleteTune(userTunes[i].id)
-        //   .then(() => console.log('duplicate deleted', userTunes[i].title))
-      }
+    if ((userTunes[i].title === userTunes[i + 1].title) && (userTunes[i].composer === userTunes[i + 1].composer)) {
+      console.log('duplicate found in user tunes')
+      dupArray.push(i)
+      console.log('dupArray is', dupArray)
+      api.deleteTune(userTunes[i].id)
+        .then(onClickMyRepertoire)
     }
   }
-  dupArray.forEach((indexOfDupe) => {
-    console.log(userTunes[indexOfDupe])
-    api.deleteTune(userTunes[indexOfDupe].id)
-      .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
-  })
+
+  // dupArray.forEach((indexOfDupe) => {
+  //   console.log(userTunes[indexOfDupe])
+  //   api.deleteTune(userTunes[indexOfDupe].id)
+  //     .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
+  //     .then(onClickMyRepertoire)
+  // })
 }
 
 const addHandlers = () => {
