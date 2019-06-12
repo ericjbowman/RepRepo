@@ -79,6 +79,17 @@ const showTunes = function (data) {
     }
     return 0
   })
+  for (let i = 0; i < userTunes.length; i++) {
+    for (let j = 0; j < userTunes.length; j++) {
+      if (userTunes[i].title === userTunes[j].title) {
+        userTunes.splice(i, 1)
+      }
+    }
+  }
+  // Would filter work without being able to access the next element using i?
+  // userTunes.filter((tune) => {
+  //   tune.title
+  // })
   console.log('userTunes', userTunes)
   let display = `<h6>${userTunes.length} tunes:</h6>`
   for (let i = 0; i < userTunes.length; i++) {
@@ -99,7 +110,7 @@ const showTunes = function (data) {
 }
 
 const showCombinedTunes = function (combinedTunes) {
-  $('#search').addClass('disappear')
+  // $('#search').addClass('disappear')
   let display = `<h6>${combinedTunes.length} tunes:</h6>`
   for (let i = 0; i < combinedTunes.length; i++) {
     display += `<div id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</div>`

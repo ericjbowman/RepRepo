@@ -212,6 +212,15 @@ const findCommonTunes = function () {
     }
   }
   console.log('combined tunes are', combinedTunes)
+  for (let i = 0; i < combinedTunes.length; i++) {
+    for (let j = 0; j < combinedTunes.length; j++) {
+      if (combinedTunes[i].title === combinedTunes[j].title) {
+        combinedTunes.splice(i, 1)
+      }
+    }
+  }
+  console.log('After mumbojumbo combined tunes are', combinedTunes)
+
   // let combinedTitles = []
   // let combinedComposers = []
   // combinedTunes.forEach(tune => combinedTitles.push(tune.title))
@@ -224,6 +233,7 @@ const findCommonTunes = function () {
 }
 
 const findOurTunes = function () {
+  isUsers = false
   checkedUserTunes = []
   console.log('something is checked!!')
   // let checkedUserTunes = []
@@ -254,8 +264,9 @@ const onInputTuneData = function (event) {
 //   store.userList = data
 //   console.log('data is ', data)
 // }
-
+let isUsers = true
 const onClickOurRep = function () {
+  isUsers = true
   $('.shared').removeClass('disappear')
   $('.add').addClass('disappear')
   $('.remove').addClass('disappear')
@@ -309,7 +320,7 @@ const onClickSearch = function (event, tuneArray) {
       }
     })
     searchTunes(tunes)
-  } else if ($('#our-rep').hasClass('selected')) {
+  } else if ($('#our-rep').hasClass('selected') && isUsers === true) {
     $('#search').trigger('reset')
     const searchField = searchTuneData.credentials.search
     console.log('search tunes was clicked')
@@ -324,8 +335,21 @@ const onClickSearch = function (event, tuneArray) {
     })
     $('.user-search').html(`${display}`)
     $('#search-message').text('Search results for: ' + searchField)
-
-// store.userList.users.email
+  } else if ($('#our-rep').hasClass('selected') && isUsers === false) {
+    $('#search').trigger('reset')
+    const searchField = searchTuneData.credentials.search
+    console.log('search tunes was clicked')
+    let display = `<h6 id="search-message"></h6>`
+    // console.log('getFormFields', getFormFields(this))
+    console.log(searchTuneData.credentials.search)
+    store.userList.users.forEach((user) => {
+      if (((combinedTunes.title.toUpperCase().includes(searchField.toUpperCase())) || (combinedTunes.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(combinedTunes.title.toUpperCase())) || (searchField.toUpperCase().includes(combinedTunes.composer.toUpperCase())))) {
+        display += `<div><label class="checkbox-inline">
+        <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
+      }
+    })
+    $('.user-search').html(`${display}`)
+    $('#search-message').text('Search results for: ' + searchField)
   }
 }
 
