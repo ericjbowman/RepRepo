@@ -189,6 +189,7 @@ const deleteCheckedTunes = function () {
 let checkedUserTunes = []
 let combinedTunes = []
 const findCommonTunes = function () {
+  combinedTunes = []
   let numOfCheckedUsers = checkedUserTunes.length
   console.log('number of checked users is', numOfCheckedUsers)
   console.log('second checked user tunes is', checkedUserTunes[1])
@@ -285,7 +286,7 @@ const searchTunes = function (tuneArray) {
   // console.log('getFormFields', getFormFields(this))
   console.log(searchTuneData.credentials.search)
   tuneArray.forEach((tune) => {
-    if ((tune.title.includes(searchField)) || (tune.composer.includes(searchField))) {
+    if (((tune.title.includes(searchField)) || (tune.composer.includes(searchField))) || ((searchField.includes(tune.title)) || (searchField.includes(tune.composer)))) {
       display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
     }

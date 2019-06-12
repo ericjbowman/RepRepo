@@ -31,6 +31,7 @@ const signInSuccess = function (data) {
   $('#dropdownMenu2').removeClass('disappear')
   $('list-choice').show()
   $('#search').show()
+  $('#search').removeClass('disappear')
   $('.reps').show()
   $('form').trigger('reset')
   $('.add').html('Add to My Repertoire')
