@@ -55,6 +55,10 @@ const onClickMyRepertoire = function () {
     .then(ui.showTunes)
 }
 
+const afterDelete = function () {
+  api.indexTunes()
+    .then(ui.showTunes)
+}
 let tuneData = {
   tune: {
     title: 'Sample',
@@ -377,17 +381,17 @@ const deleteDuplicatesForUserTunes = function (data) {
       console.log('duplicate found in user tunes')
       dupArray.push(i)
       console.log('dupArray is', dupArray)
-      api.deleteTune(userTunes[i].id)
-        .then(onClickMyRepertoire)
+      // api.deleteTune(userTunes[i].id)
+      //   .then(onClickMyRepertoire)
     }
   }
 
-  // dupArray.forEach((indexOfDupe) => {
-  //   console.log(userTunes[indexOfDupe])
-  //   api.deleteTune(userTunes[indexOfDupe].id)
-  //     .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
-  //     .then(onClickMyRepertoire)
-  // })
+  dupArray.forEach((indexOfDupe) => {
+    console.log(userTunes[indexOfDupe])
+    api.deleteTune(userTunes[indexOfDupe].id)
+      .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
+      .then(afterDelete)
+  })
 }
 
 const addHandlers = () => {
