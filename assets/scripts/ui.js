@@ -30,7 +30,7 @@ const showMasterTunes = function () {
 const signInSuccess = function (data) {
   $('#dropdownMenu2').removeClass('disappear')
   $('list-choice').show()
-  $('.search').show()
+  $('#search').show()
   $('.reps').show()
   $('form').trigger('reset')
   $('.add').html('Add to My Repertoire')
@@ -67,7 +67,18 @@ const showTunes = function (data) {
   store.tunes = data.tunes
   let userTunes = []
   userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-  console.log('userTunes is', userTunes)
+  userTunes.sort(function (a, b) {
+    let nameA = a.title.toUpperCase()
+    let nameB = b.title.toUpperCase()
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  })
+  console.log('userTunes', userTunes)
   let display = `<h6>${userTunes.length} tunes:</h6>`
   for (let i = 0; i < userTunes.length; i++) {
     display += `<div><label class="checkbox-inline">
@@ -107,7 +118,19 @@ const showUsers = function (data) {
   store.userList.users.forEach(tune => emailList.push(tune.email))
   console.log('emailList is', emailList)
   let display = '<p class="user-search"</p><h6>Choose Users:</h6>'
-  store.userList.users.forEach(user => {
+  const alphaUsers = store.userList.users.sort(function (a, b) {
+    let nameA = a.email.toUpperCase()
+    let nameB = b.email.toUpperCase()
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  })
+  console.log('alphaUsers is', alphaUsers)
+  alphaUsers.forEach(user => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
   })
@@ -130,6 +153,7 @@ const signOutSuccess = function () {
   $('.actions').addClass('disappear')
   $('.remove').removeClass('col-4')
   $('.edit').removeClass('col-4')
+  $('#search').hide()
   store.tunes = []
 }
 

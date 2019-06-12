@@ -12,6 +12,6 @@ $(() => {
   events.addHandlers()
   // $('list-choice').hide()
   $('.reps').hide()
-  $('.search').hide()
+  $('#search').hide()
   // $('.edit').on('click', '#edit-tune-data', data, events.onClickEdit(data))
 })
