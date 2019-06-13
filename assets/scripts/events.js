@@ -177,7 +177,7 @@ const addCheckedMasterTunes = function () {
       checkedTunes.push($(`#${i}`).parent().text())
     }
   }
-  for (let i = 0; i < checkedTuneIndexes.length; i++) {
+  for (let i = 0; i <= checkedTuneIndexes.length; i++) {
     $(`#${i}`).prop('checked', false)
   }
   let x = checkedTunes.map((tune) => tune.trim())
