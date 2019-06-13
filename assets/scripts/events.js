@@ -133,6 +133,10 @@ const onClickEditSubmit = function (event) {
   }
 }
 
+const storeTunes = function (data) {
+  store.tunes = data.tunes
+}
+
 const onClickEdit = function () {
   $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
@@ -160,6 +164,7 @@ const onClickEdit = function () {
 //   // $('.actions').on('submit', '#input-tune-data', )
 // }
 let checkedTunes = []
+let checkedTuneIndexes = []
 const addCheckedMasterTunes = function () {
   if ($('#full-rep').hasClass('selected')) {
   checkedTunes = []
@@ -168,6 +173,7 @@ const addCheckedMasterTunes = function () {
   for (let i = 1; i <= store.masterTunes.length; i++) {
     if ($(`#${i}`).prop('checked')) {
       console.log('checked tune is', $(`#${i}`).parent().text())
+      checkedTuneIndexes.push(i)
       checkedTunes.push($(`#${i}`).parent().text())
     }
   }
@@ -200,7 +206,11 @@ const addCheckedMasterTunes = function () {
       $('#add-success-message').html('Choose New Tunes!')
       $('#add-success').modal('show')
     }
-  }
+  } api.indexTunes()
+      .then(storeTunes)
+    for (let i = 0; i < checkedTuneIndexes.length; i++) {
+      $(`#${i}`).prop('checked', false)
+    }
   }
 }
 
