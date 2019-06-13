@@ -79,10 +79,10 @@ const onClickNew = function (event) {
   event.preventDefault()
   if ($('#my-rep').hasClass('selected')) {
     const input = getFormFields(this)
-    console.log('input is', input)
+    // console.log('input is', input)
     tuneData.tune.title = input.title
     tuneData.tune.composer = input.composer
-    console.log('tune data is', tuneData)
+    // console.log('tune data is', tuneData)
   // if (store.tunes.some((storeTune) => {
   //   return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
   // })) {
@@ -92,7 +92,7 @@ const onClickNew = function (event) {
     return (tune.title !== tuneData.tune.title) && (tune.composer !== tuneData.tune.composer)
   })) {
     api.createTune(tuneData)
-      .then(() => console.log('Created a tune!'))
+      // .then(() => console.log('Created a tune!'))
       .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
       // .then(deleteDuplicatesForUserTunes)
@@ -110,12 +110,12 @@ const onClickNew = function (event) {
 const onClickEditSubmit = function (event) {
   event.preventDefault()
   const input = getFormFields(this)
-  console.log('input is', input)
+  // console.log('input is', input)
   patchTuneData.tune.title = input.title
   patchTuneData.tune.composer = input.composer
-  console.log('patchTuneData is', patchTuneData)
+  // console.log('patchTuneData is', patchTuneData)
   if ($('#my-rep').hasClass('selected')) {
-    console.log('my rep is selected')
+    // console.log('my rep is selected')
     let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
     if (userTunes.every((tune) => {
       return (tune.title !== patchTuneData.tune.title) && (tune.composer !== patchTuneData.tune.composer)
@@ -123,7 +123,7 @@ const onClickEditSubmit = function (event) {
       api.patchTune(tuneId, patchTuneData)
         .then(onClickMyRepertoire)
         .then(() => $('#edit-tune-message').html('Success'))
-        .then(() => console.log('Patch success'))
+        // .then(() => console.log('Patch success'))
         .then(() => $('form').trigger('reset'))
         .catch(() => $('#edit-tune-message').html('Failure'))
     } else {
@@ -140,12 +140,12 @@ const storeTunes = function (data) {
 const onClickEdit = function () {
   $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
-    console.log('Edit was clicked')
+    // console.log('Edit was clicked')
     for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
-        console.log('checked tune is', $(`#${i}`).parent().text())
+        // console.log('checked tune is', $(`#${i}`).parent().text())
         tuneId = i
-        console.log('tune Id is', tuneId)
+        // console.log('tune Id is', tuneId)
       }
     }
   }
@@ -168,24 +168,27 @@ let checkedTuneIndexes = []
 const addCheckedMasterTunes = function () {
   if ($('#full-rep').hasClass('selected')) {
   checkedTunes = []
-  console.log('add was clicked')
-  console.log('1 is', $('#1').html())
+  // console.log('add was clicked')
+  // console.log('1 is', $('#1').html())
   for (let i = 1; i <= store.masterTunes.length; i++) {
     if ($(`#${i}`).prop('checked')) {
-      console.log('checked tune is', $(`#${i}`).parent().text())
+      // console.log('checked tune is', $(`#${i}`).parent().text())
       checkedTuneIndexes.push(i)
       checkedTunes.push($(`#${i}`).parent().text())
     }
+  }
+  for (let i = 0; i < checkedTuneIndexes.length; i++) {
+    $(`#${i}`).prop('checked', false)
   }
   let x = checkedTunes.map((tune) => tune.trim())
   let y = x.map((tune) => tune.split(','))
   let titles = []
   let composers = []
-  console.log('checked tunes are', y)
+  // console.log('checked tunes are', y)
   y.forEach((arr) => titles.push(arr[0]))
   y.forEach((arr) => composers.push(arr[1]))
-  console.log('titles', titles)
-  console.log('composers', composers)
+  // console.log('titles', titles)
+  // console.log('composers', composers)
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   for (let i = 0; i < titles.length; i++) {
     tuneData = {
@@ -199,7 +202,7 @@ const addCheckedMasterTunes = function () {
     })) {
       api.createTune(tuneData)
         .then(deleteCheckedTunes)
-        .then(() => console.log('Created a tune!'))
+        // .then(() => console.log('Created a tune!'))
       $('#add-success-message').html('Success!')
       $('#add-success').modal('show')
     } else {
@@ -208,9 +211,9 @@ const addCheckedMasterTunes = function () {
     }
   } api.indexTunes()
       .then(storeTunes)
-    for (let i = 0; i < checkedTuneIndexes.length; i++) {
-      $(`#${i}`).prop('checked', false)
-    }
+    // for (let i = 0; i < checkedTuneIndexes.length; i++) {
+    //   $(`#${i}`).prop('checked', false)
+    // }
   }
 }
 
@@ -218,11 +221,11 @@ const deleteCheckedTunes = function () {
   if ($('#my-rep').hasClass('selected')) {
     for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
-        console.log('checked tune is', $(`#${i}`).parent().text())
+        // console.log('checked tune is', $(`#${i}`).parent().text())
         // deleteIds.push(i)
         api.deleteTune(i)
           .then(onClickMyRepertoire)
-          .catch(() => console.log('Delete failed'))
+          // .catch(() => console.log('Delete failed'))
       }
     }
   }
@@ -232,10 +235,10 @@ let combinedTunes = []
 const findCommonTunes = function () {
   combinedTunes = []
   let numOfCheckedUsers = checkedUserTunes.length
-  console.log('number of checked users is', numOfCheckedUsers)
-  console.log('second checked user tunes is', checkedUserTunes[1])
+  // console.log('number of checked users is', numOfCheckedUsers)
+  // console.log('second checked user tunes is', checkedUserTunes[1])
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
-  console.log('flattened user tunes is', flattenedUserTunes)
+  // console.log('flattened user tunes is', flattenedUserTunes)
   // let combinedTunes = []
   for (let i = 0; i < flattenedUserTunes.length; i++) {
     let counter = 0
@@ -244,15 +247,15 @@ const findCommonTunes = function () {
       // let counter = 0
       if (flattenedUserTunes[i].title === flattenedUserTunes[j].title) {
         counter++
-        console.log('match found!', counter)
+        // console.log('match found!', counter)
         if (counter === numOfCheckedUsers) {
           combinedTunes.push(flattenedUserTunes[i])
-          console.log('pushed tune is', flattenedUserTunes[i])
+          // console.log('pushed tune is', flattenedUserTunes[i])
         }
       }
     }
   }
-  console.log('combined tunes are', combinedTunes)
+  // console.log('combined tunes are', combinedTunes)
   for (let i = 0; i < combinedTunes.length; i++) {
     for (let j = 0; j < combinedTunes.length; j++) {
       if (combinedTunes[i].title === combinedTunes[j].title) {
@@ -260,7 +263,7 @@ const findCommonTunes = function () {
       }
     }
   }
-  console.log('After mumbojumbo combined tunes are', combinedTunes)
+  // console.log('After mumbojumbo combined tunes are', combinedTunes)
 
   // let combinedTitles = []
   // let combinedComposers = []
@@ -276,11 +279,11 @@ const findCommonTunes = function () {
 const findOurTunes = function () {
   isUsers = false
   checkedUserTunes = []
-  console.log('something is checked!!')
+  // console.log('something is checked!!')
   // let checkedUserTunes = []
   for (let i = 1; i <= 5000; i++) {
     if ($(`#${i}`).prop('checked')) {
-      console.log('something is checked!!')
+      // console.log('something is checked!!')
       store.userList.users.forEach(user => {
         if (user.id === i) {
           checkedUserTunes.push(user.tunes)
@@ -288,14 +291,14 @@ const findOurTunes = function () {
       })
     }
   }
-  console.log('checked user tunes is ', checkedUserTunes)
+  // console.log('checked user tunes is ', checkedUserTunes)
   findCommonTunes()
 }
 
 const onInputTuneData = function (event) {
   event.preventDefault()
   const newTuneData = getFormFields(this)
-  console.log('newTuneData is', newTuneData)
+  // console.log('newTuneData is', newTuneData)
 }
 
 // const modsubmit = function (event) {
@@ -328,15 +331,15 @@ const onClickOurRep = function () {
 let searchTuneData = {}
 
 const searchTunes = function (tuneArray) {
-  console.log(tuneArray)
+  // console.log(tuneArray)
   // event.preventDefault()
   // const searchTuneData = getFormFields(this)
   $('#search').trigger('reset')
   const searchField = searchTuneData.credentials.search
-  console.log('search tunes was clicked')
+  // console.log('search tunes was clicked')
   let display = `<h6 id="search-message"></h6>`
   // console.log('getFormFields', getFormFields(this))
-  console.log(searchTuneData.credentials.search)
+  // console.log(searchTuneData.credentials.search)
   tuneArray.forEach((tune) => {
     if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
       display += `<div><label class="checkbox-inline">
@@ -352,7 +355,7 @@ const onClickSearch = function (event, tuneArray) {
   searchTuneData = getFormFields(this)
   if ($('#full-rep').hasClass('selected')) {
     searchTunes(store.masterTunes)
-    console.log('my rep selected')
+    // console.log('my rep selected')
   } else if ($('#my-rep').hasClass('selected')) {
     const tunes = []
     store.tunes.forEach((tune) => {
@@ -365,10 +368,10 @@ const onClickSearch = function (event, tuneArray) {
     $('#search').trigger('reset')
     $('#search-results').removeClass('disappear')
     const searchField = searchTuneData.credentials.search
-    console.log('search tunes was clicked')
+    // console.log('search tunes was clicked')
     let display = `<h6 id="search-message"></h6>`
     // console.log('getFormFields', getFormFields(this))
-    console.log(searchTuneData.credentials.search)
+    // console.log(searchTuneData.credentials.search)
     store.userList.users.forEach((user) => {
       if ((user.email.toUpperCase().includes(searchField.toUpperCase()) || (searchField.toUpperCase().includes(user.email.toUpperCase())))) {
         display += `<div><label class="checkbox-inline">
@@ -381,10 +384,10 @@ const onClickSearch = function (event, tuneArray) {
     $('#search').trigger('reset')
     $('#search-results').removeClass('disappear')
     const searchField = searchTuneData.credentials.search
-    console.log('search tunes was clicked')
+    // console.log('search tunes was clicked')
     let display = `<h6 id="search-message"></h6>`
     // console.log('getFormFields', getFormFields(this))
-    console.log(searchTuneData.credentials.search)
+    // console.log(searchTuneData.credentials.search)
     combinedTunes.forEach((tune) => {
       if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
         display += `<div><span>${tune.title}, ${tune.composer}</span></div>`
