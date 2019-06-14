@@ -15,5 +15,11 @@ As a music educator, I want an app to keep track of my students repetoire.
 Wireframe:
 https://imgur.com/pAGbi9x
 
-Link to api repository:
+Api repository:
 https://github.com/ericjbowman/RepRepo-api
+
+Api deployemnt:
+https://fast-fjord-28821.herokuapp.com
+
+Deployment:
+https://ericjbowman.github.io/RepRepo/

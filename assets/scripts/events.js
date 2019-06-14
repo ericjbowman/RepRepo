@@ -89,7 +89,7 @@ const onClickNew = function (event) {
   //   $('#new-tune-message').html('No Duplicates!')
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   if (userTunes.every((tune) => {
-    return (tune.title !== tuneData.tune.title) && (tune.composer !== tuneData.tune.composer)
+    return (tune.title !== tuneData.tune.title) || (tune.composer !== tuneData.tune.composer)
   })) {
     api.createTune(tuneData)
       // .then(() => console.log('Created a tune!'))
@@ -177,9 +177,7 @@ const addCheckedMasterTunes = function () {
       checkedTunes.push($(`#${i}`).parent().text())
     }
   }
-  for (let i = 0; i <= checkedTuneIndexes.length; i++) {
-    $(`#${i}`).prop('checked', false)
-  }
+
   let x = checkedTunes.map((tune) => tune.trim())
   let y = x.map((tune) => tune.split(','))
   let titles = []
@@ -198,7 +196,7 @@ const addCheckedMasterTunes = function () {
       }
     }
     if (userTunes.every((tune) => {
-      return (tune.title !== tuneData.tune.title) && (tune.composer !== tuneData.tune.composer)
+      return (tune.title !== tuneData.tune.title) || (tune.composer !== tuneData.tune.composer)
     })) {
       api.createTune(tuneData)
         .then(deleteCheckedTunes)
@@ -215,6 +213,7 @@ const addCheckedMasterTunes = function () {
     //   $(`#${i}`).prop('checked', false)
     // }
   }
+  $('.checkbox-inline > input').prop('checked', false)
 }
 
 const deleteCheckedTunes = function () {
@@ -256,13 +255,15 @@ const findCommonTunes = function () {
     }
   }
   // console.log('combined tunes are', combinedTunes)
-  for (let i = 0; i < combinedTunes.length; i++) {
-    for (let j = 0; j < combinedTunes.length; j++) {
-      if (combinedTunes[i].title === combinedTunes[j].title) {
-        combinedTunes.splice(i, 1)
-      }
-    }
-  }
+  // This prevents duplicates but may cause bugs
+  // for (let i = 0; i < combinedTunes.length; i++) {
+  //   for (let j = 0; j < combinedTunes.length; j++) {
+  //     if (combinedTunes[i].title === combinedTunes[j].title) {
+  //       combinedTunes.splice(i, 1)
+  //     }
+  //   }
+  // }
+
   // console.log('After mumbojumbo combined tunes are', combinedTunes)
 
   // let combinedTitles = []

@@ -44,14 +44,14 @@ const signInSuccess = function (data) {
   $('.actions').removeClass('disappear')
   store.user = data.user
   store.user_id = data.user.id
-  console.log('user id is', store.user_id)
-  console.log('store.user is', store.user)
+  // console.log('user id is', store.user_id)
+  // console.log('store.user is', store.user)
   // $('#log-message').html('Signed in!')
   api.indexMasterTunes()
     .then((index) => {
       store.masterTunes = index.master_tunes
     })
-    .then((index) => console.log('Index worked', store.masterTunes))
+    // .then((index) => console.log('Index worked', store.masterTunes))
     // .then(() => $('#log-message').html(`${store.masterTunes[0].title}`))
     .then(showMasterTunes)
     // .catch($('#log-message').append(' Index failed!'))
@@ -95,7 +95,7 @@ const showTunes = function (data) {
   // userTunes.filter((tune) => {
   //   tune.title
   // })
-  console.log('userTunes', userTunes)
+  // console.log('userTunes', userTunes)
   let display = `<h6>${userTunes.length} tunes:</h6>`
   for (let i = 0; i < userTunes.length; i++) {
     display += `<div><label class="checkbox-inline">
@@ -137,9 +137,9 @@ const showUsers = function (data) {
   $('#search').removeClass('disappear')
   let emailList = []
   store.userList = data
-  console.log('userList is', store.userList.users)
+  // console.log('userList is', store.userList.users)
   store.userList.users.forEach(tune => emailList.push(tune.email))
-  console.log('emailList is', emailList)
+  // console.log('emailList is', emailList)
   let display = '<p class="user-search"</p><h6>Choose Users:</h6>'
   const alphaUsers = store.userList.users.sort(function (a, b) {
     let nameA = a.email.toUpperCase()
@@ -152,7 +152,7 @@ const showUsers = function (data) {
     }
     return 0
   })
-  console.log('alphaUsers is', alphaUsers)
+  // console.log('alphaUsers is', alphaUsers)
   alphaUsers.forEach(user => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
