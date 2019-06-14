@@ -231,6 +231,7 @@ const deleteCheckedTunes = function () {
 }
 let checkedUserTunes = []
 let combinedTunes = []
+// combinedTunes is an array of arrays, each array is all of users tunes
 const findCommonTunes = function () {
   combinedTunes = []
   let numOfCheckedUsers = checkedUserTunes.length
