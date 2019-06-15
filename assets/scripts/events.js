@@ -232,10 +232,12 @@ const addCheckedMasterTunes = function () {
   }
   $('.checkbox-inline > input').prop('checked', false)
 }
-
+// const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.user.id > tune2.user.id) ? tune1 : tune2)
 const deleteCheckedTunes = function () {
+  const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.id > tune2.id) ? tune1 : tune2)
+  console.log('greatest tune index is', greatestTuneIndex.id)
   if ($('#my-rep').hasClass('selected')) {
-    for (let i = 1; i <= 5000; i++) {
+    for (let i = 1; i <= greatestTuneIndex.id; i++) {
       if ($(`#${i}`).prop('checked')) {
         // console.log('checked tune is', $(`#${i}`).parent().text())
         // deleteIds.push(i)
