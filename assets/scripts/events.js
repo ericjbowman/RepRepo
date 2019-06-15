@@ -90,7 +90,7 @@ const onClickNew = function (event) {
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   console.log('userTunes from onClickNew is', userTunes)
   if (userTunes.every((tune) => {
-    return ((tune.title !== tuneData.tune.title) || ((tune.composer !== tuneData.tune.composer) && ((tune.composer !== ` ${tuneData.tune.composer}`))))
+    return ((tune.title.toUpperCase() !== tuneData.tune.title.toUpperCase()) || ((tune.composer.toUpperCase() !== tuneData.tune.composer.toUpperCase()) && ((tune.composer.toUpperCase() !== ` ${tuneData.tune.composer.toUpperCase()}`))))
   })) {
     api.createTune(tuneData)
       // .then(() => console.log('Created a tune!'))
@@ -119,7 +119,7 @@ const onClickEditSubmit = function (event) {
     // console.log('my rep is selected')
     let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
     if (userTunes.every((tune) => {
-      return (tune.title !== patchTuneData.tune.title) && (tune.composer !== patchTuneData.tune.composer)
+      return (tune.title.toUpperCase() !== patchTuneData.tune.title.toUpperCase()) && (tune.composer.toUpperCase() !== patchTuneData.tune.composer.toUpperCase())
     })) {
       api.patchTune(tuneId, patchTuneData)
         .then(onClickMyRepertoire)
@@ -258,7 +258,7 @@ const findCommonTunes = function () {
     // console.log('counter is', counter)
     for (let j = i; j < flattenedUserTunes.length; j++) {
       // let counter = 0
-      if (((flattenedUserTunes[i].title === flattenedUserTunes[j].title) && (flattenedUserTunes[i].composer.replace(/\s/g, '') === flattenedUserTunes[j].composer.replace(/\s/g, '')))) {
+      if (((flattenedUserTunes[i].title.toUpperCase() === flattenedUserTunes[j].title.toUpperCase()) && (flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].composer.toUpperCase().replace(/\s/g, '')))) {
         counter++
         // console.log('match found!', counter)
         if (counter === numOfCheckedUsers) {
