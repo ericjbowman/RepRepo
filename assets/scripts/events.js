@@ -475,6 +475,9 @@ const addHandlers = () => {
   $('.reps').hide()
   $('#search').addClass('disappear')
   $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
+  // $('body').on('click', 'label', () => $('.add').removeClass('disappear'))
+
+    // $('.actions').removeClass('disappear')
   // $('.input-tune-data').on('submit', onInputTuneData)
 //   $('.input-tune-data').on('submit', (event) => event.preventDefault)
 //   $('.modsub').on('submit', (event) => event.preventDefault)

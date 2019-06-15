@@ -89,6 +89,7 @@ footer {
 
 .reps:hover {
   color: green;
+  cursor: pointer;
 }
 
 .account-line {
@@ -197,7 +198,6 @@ footer {
 
 
 
-
 h4 {
   position: relative;
 }
@@ -231,7 +231,13 @@ h4::after {
 h4:hover::after {
   transform-origin: center top;
   transform: scaleY(1);
+
 }
+
+.sp:hover {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 995px) {
   .list-choice {
     margin-top: 5.2em;

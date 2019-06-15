@@ -7,7 +7,7 @@ const signUpSuccess = function (data) {
 }
 
 const showMasterTunes = function () {
-  let display = '<h6>Jazz Standards:</h6>'
+  let display = '<h6>Check standards you know and click "Add to Repertoire"</h6>'
   store.masterTunes.forEach(tune => {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
@@ -123,7 +123,7 @@ const showCombinedTunes = function (combinedTunes) {
   $('.actions').addClass('disappear')
   $('#search-results').addClass('disappear')
   // $('#search').addClass('disappear')
-  let display = `<h6>${combinedTunes.length} tunes:</h6>`
+  let display = `<h6>Y'all know ${combinedTunes.length} tunes:</h6>`
   for (let i = 0; i < combinedTunes.length; i++) {
     display += `<div id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</div>`
   }
@@ -145,7 +145,7 @@ const showUsers = function (data) {
   // console.log('userList is', store.userList.users)
   store.userList.users.forEach(tune => emailList.push(tune.email))
   // console.log('emailList is', emailList)
-  let display = '<p class="user-search"</p><h6>Choose Users:</h6>'
+  let display = '<p class="user-search"</p><h6>Choose Users and click "Create Shared Repertoire":</h6>'
   const alphaUsers = store.userList.users.sort(function (a, b) {
     let nameA = a.email.toUpperCase()
     let nameB = b.email.toUpperCase()
