@@ -62,10 +62,12 @@ const signInSuccess = function (data) {
 }
 
 const signInFailure = function () {
+  $('form').trigger('reset')
   $('.step-one').html('Sign-in failed')
 }
 
 const signUpFailure = function () {
+  $('form').trigger('reset')
   $('.step-one').html('Sign-up failed')
 }
 

@@ -88,8 +88,9 @@ const onClickNew = function (event) {
   // })) {
   //   $('#new-tune-message').html('No Duplicates!')
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+  console.log('userTunes from onClickNew is', userTunes)
   if (userTunes.every((tune) => {
-    return (tune.title !== tuneData.tune.title) || (tune.composer !== tuneData.tune.composer)
+    return ((tune.title !== tuneData.tune.title) || ((tune.composer !== tuneData.tune.composer)))
   })) {
     api.createTune(tuneData)
       // .then(() => console.log('Created a tune!'))
@@ -257,7 +258,7 @@ const findCommonTunes = function () {
     // console.log('counter is', counter)
     for (let j = i; j < flattenedUserTunes.length; j++) {
       // let counter = 0
-      if (flattenedUserTunes[i].title === flattenedUserTunes[j].title) {
+      if ((flattenedUserTunes[i].title === flattenedUserTunes[j].title)) {
         counter++
         // console.log('match found!', counter)
         if (counter === numOfCheckedUsers) {
