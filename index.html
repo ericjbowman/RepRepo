@@ -18,7 +18,7 @@
       <nav id="top-nav">
         <div class="app-name">RepRepo</div>
         <form id="search" class="form-inline my-2 my-lg-0 search-bar disappear">
-          <input class="form-control mr-sm-2 search" type="text" placeholder="Search" name="credentials[search]" aria-label="Search">
+          <input class="form-control mr-sm-2 search" type="text" placeholder="Search" name="credentials[search]" maxlength="40" aria-label="Search">
           <!-- <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button> -->
           <input type="submit" value="Search" class="btn btn-outline-success">
         </form>
@@ -63,15 +63,15 @@
       <div class="initLog">
       <form id="sign-up">
         <h3 class="initLog-headers">Sign up</h3>
-          <input class="third log-field" type="text" name="credentials[email]" placeholder="Email">
-          <input class="third log-field" type="password" name="credentials[password]" placeholder="Password">
-          <input class="third log-field" type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+          <input class="third log-field" type="text" name="credentials[email]" maxlength="40" placeholder="Email">
+          <input class="third log-field" type="password" name="credentials[password]" maxlength="40" placeholder="Password">
+          <input class="third log-field" type="password" name="credentials[password_confirmation]" maxlength="40" placeholder="Confirm Password">
           <br><input type="submit" value="Sign up" class="btn btn-success btn-block">
       </form>
       <form id="sign-in">
         <h3 class="initLog-headers">Sign in</h3>
-          <input class="third log-field" type="text" name="credentials[email]" placeholder="Email">
-          <input class="third log-field" type="password" name="credentials[password]" placeholder="Password">
+          <input class="third log-field" type="text" name="credentials[email]" maxlength="40" placeholder="Email">
+          <input class="third log-field" type="password" name="credentials[password]" maxlength="40" placeholder="Password">
           <br><input type="submit" value="Sign in" class="btn btn-success btn-block third">
       </form>
       <!-- <p id="log-message"></p> -->
@@ -100,8 +100,8 @@
               </div>
               <div class="modal-body pwBody">
                 <form id="edit-tune-data">
-                  <input type="text" name="title" placeholder="Title">
-                  <input type="text" name="composer" placeholder="Composer">
+                  <input type="text" name="title" maxlength="40" placeholder="Title">
+                  <input type="text" name="composer" maxlength="40" placeholder="Composer">
                   <input type="submit" value="Edit" class="btn btn-success">
                 </form>
               </div>
@@ -120,8 +120,8 @@
               </div>
               <div class="modal-body pwBody">
                 <form id="input-tune-data">
-                  <input type="text" name="title" placeholder="Title">
-                  <input type="text" name="composer" placeholder="Composer">
+                  <input type="text" name="title" maxlength="40" placeholder="Title">
+                  <input type="text" name="composer" maxlength="40" placeholder="Composer">
                   <input type="submit" value="Enter" class="btn btn-success modsub">
                 </form>
               </div>
