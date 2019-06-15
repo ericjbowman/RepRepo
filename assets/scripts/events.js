@@ -40,6 +40,7 @@ const onChangePassword = function (event) {
 
 const onClickMyRepertoire = function () {
   // $('.shared').addClass('add')
+  $('.actions').removeClass('disappear')
   $('.shared').addClass('disappear')
   $('.remove').addClass('col-4')
   $('.edit').addClass('col-4')
@@ -326,6 +327,7 @@ const onInputTuneData = function (event) {
 let isUsers = true
 const onClickOurRep = function () {
   isUsers = true
+  $('.actions').removeClass('disappear')
   $('.shared').removeClass('disappear')
   $('.add').addClass('disappear')
   $('.remove').addClass('disappear')

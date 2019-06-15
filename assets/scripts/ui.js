@@ -12,6 +12,7 @@ const showMasterTunes = function () {
     display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
   })
+  $('.actions').removeClass('disappear')
   $('#log-message').html(`${display}`)
   $('#my-rep').removeClass('selected')
   $('#full-rep').addClass('selected')
@@ -30,6 +31,7 @@ const showMasterTunes = function () {
 }
 
 const signInSuccess = function (data) {
+  $('.actions').removeClass('disappear')
   $('#dropdownMenu2').removeClass('disappear')
   $('list-choice').show()
   $('#search').removeClass('disappear')
@@ -118,6 +120,7 @@ const showTunes = function (data) {
 }
 
 const showCombinedTunes = function (combinedTunes) {
+  $('.actions').addClass('disappear')
   $('#search-results').addClass('disappear')
   // $('#search').addClass('disappear')
   let display = `<h6>${combinedTunes.length} tunes:</h6>`
