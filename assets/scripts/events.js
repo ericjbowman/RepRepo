@@ -165,6 +165,10 @@ const onClickEdit = function () {
 // }
 let checkedTunes = []
 let checkedTuneIndexes = []
+const indexAndstore = function () {
+  api.indexTunes()
+    .then(storeTunes)
+}
 const addCheckedMasterTunes = function () {
   if ($('#full-rep').hasClass('selected')) {
   checkedTunes = []
@@ -187,7 +191,16 @@ const addCheckedMasterTunes = function () {
   y.forEach((arr) => composers.push(arr[1]))
   // console.log('titles', titles)
   // console.log('composers', composers)
-  let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+  // let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+  let userTunes = []
+  store.tunes.forEach((tune) => {
+    console.log(`${tune.title}|${tune.user.id}|${store.user.id}|`)
+    if (tune.user.id === store.user.id) {
+      userTunes.push(tune)
+    }
+  })
+  // store.tunes.forEach((tune) => console.log(tune.user.id, store.user.id))
+  console.log('userTunes is', userTunes)
   for (let i = 0; i < titles.length; i++) {
     tuneData = {
       tune: {
@@ -199,7 +212,7 @@ const addCheckedMasterTunes = function () {
       return (tune.title !== tuneData.tune.title) || (tune.composer !== tuneData.tune.composer)
     })) {
       api.createTune(tuneData)
-        .then(deleteCheckedTunes)
+        .then(indexAndstore)
         // .then(() => console.log('Created a tune!'))
       $('#add-success-message').html('Success!')
       $('#add-success').modal('show')
@@ -207,8 +220,7 @@ const addCheckedMasterTunes = function () {
       $('#add-success-message').html('Choose New Tunes!')
       $('#add-success').modal('show')
     }
-  } api.indexTunes()
-      .then(storeTunes)
+  }
     // for (let i = 0; i < checkedTuneIndexes.length; i++) {
     //   $(`#${i}`).prop('checked', false)
     // }
