@@ -90,7 +90,7 @@ const onClickNew = function (event) {
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   console.log('userTunes from onClickNew is', userTunes)
   if (userTunes.every((tune) => {
-    return ((tune.title !== tuneData.tune.title) || ((tune.composer !== tuneData.tune.composer)))
+    return ((tune.title !== tuneData.tune.title) || ((tune.composer !== tuneData.tune.composer) && ((tune.composer !== ` ${tuneData.tune.composer}`))))
   })) {
     api.createTune(tuneData)
       // .then(() => console.log('Created a tune!'))
