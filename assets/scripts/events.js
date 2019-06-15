@@ -119,7 +119,9 @@ const onClickEditSubmit = function (event) {
   if ($('#my-rep').hasClass('selected')) {
     // console.log('my rep is selected')
     let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-    if (userTunes.every((tune) => {
+    if (tuneId === 0) {
+      $('#edit-tune-message').html('Check a Tune to Edit')
+    } else if (userTunes.every((tune) => {
       return (tune.title.toUpperCase() !== patchTuneData.tune.title.toUpperCase()) && (tune.composer.toUpperCase() !== patchTuneData.tune.composer.toUpperCase())
     })) {
       api.patchTune(tuneId, patchTuneData)
@@ -140,6 +142,7 @@ const storeTunes = function (data) {
 }
 
 const onClickEdit = function () {
+  tuneId = 0
   $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
     // console.log('Edit was clicked')
