@@ -241,7 +241,14 @@ const deleteCheckedTunes = function () {
         // deleteIds.push(i)
         api.deleteTune(i)
           .then(onClickMyRepertoire)
+          .then(() => {
+            $('#add-success-message').html('Success!')
+            $('#add-success').modal('show')
+          })
           // .catch(() => console.log('Delete failed'))
+      } else {
+        $('#add-success-message').html('You must check at least 1 tune')
+        $('#add-success').modal('show')
       }
     }
   }
