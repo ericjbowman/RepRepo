@@ -4,12 +4,19 @@ $navdark: #343a40;
 $purp: #8f00c4;
 $dark-purp: #7700a3;
 
-* {
-  font-family: 'Noto Sans HK', sans-serif;
-}
+// * {
+//   // font-family: 'Noto Sans HK', sans-serif;
+//   font-family: 'Karla', sans-serif;
+// }
 
 body {
   background-color: #eff3f7;
+  font-family: 'Quicksand', sans-serif;
+}
+
+p, .log-field, .search {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
 }
 
 #log-message {
@@ -245,7 +252,7 @@ h4:hover::after {
   // }
 
   h4, h3 {
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
   }
 
