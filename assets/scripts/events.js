@@ -424,6 +424,7 @@ const addHandlers = () => {
   $('.reps').hide()
   $('#search').addClass('disappear')
   $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
+  $('.step-one').delay(2000).addClass('enable')
 }
 
 module.exports = {
