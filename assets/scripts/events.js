@@ -89,15 +89,12 @@ const onClickNew = function (event) {
   // })) {
   //   $('#new-tune-message').html('No Duplicates!')
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-  console.log('userTunes from onClickNew is', userTunes)
   if (userTunes.every((tune) => {
     return ((tune.title.toUpperCase() !== tuneData.tune.title.toUpperCase()) || ((tune.composer.toUpperCase() !== tuneData.tune.composer.toUpperCase()) && ((tune.composer.toUpperCase() !== ` ${tuneData.tune.composer.toUpperCase()}`))))
   })) {
     api.createTune(tuneData)
-      // .then(() => console.log('Created a tune!'))
       .then(() => $('#new-tune-message').html('Success'))
       .then(api.indexTunes)
-      // .then(deleteDuplicatesForUserTunes)
       .then(ui.showTunes)
       .then(onClickMyRepertoire)
       .then(() => $('form').trigger('reset'))
@@ -112,12 +109,9 @@ const onClickNew = function (event) {
 const onClickEditSubmit = function (event) {
   event.preventDefault()
   const input = getFormFields(this)
-  // console.log('input is', input)
   patchTuneData.tune.title = input.title
   patchTuneData.tune.composer = input.composer
-  // console.log('patchTuneData is', patchTuneData)
   if ($('#my-rep').hasClass('selected')) {
-    // console.log('my rep is selected')
     let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
     if (tuneId === 0) {
       $('#edit-tune-message').html('Check a Tune to Edit')
@@ -127,7 +121,6 @@ const onClickEditSubmit = function (event) {
       api.patchTune(tuneId, patchTuneData)
         .then(onClickMyRepertoire)
         .then(() => $('#edit-tune-message').html('Success'))
-        // .then(() => console.log('Patch success'))
         .then(() => $('form').trigger('reset'))
         .catch(() => $('#edit-tune-message').html('Failure'))
     } else {
@@ -145,12 +138,9 @@ const onClickEdit = function () {
   tuneId = 0
   $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
-    // console.log('Edit was clicked')
     for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
-        // console.log('checked tune is', $(`#${i}`).parent().text())
         tuneId = i
-        // console.log('tune Id is', tuneId)
       }
     }
   }
@@ -177,11 +167,8 @@ const indexAndstore = function () {
 const addCheckedMasterTunes = function () {
   if ($('#full-rep').hasClass('selected')) {
   checkedTunes = []
-  // console.log('add was clicked')
-  // console.log('1 is', $('#1').html())
   for (let i = 1; i <= store.masterTunes.length; i++) {
     if ($(`#${i}`).prop('checked')) {
-      // console.log('checked tune is', $(`#${i}`).parent().text())
       checkedTuneIndexes.push(i)
       checkedTunes.push($(`#${i}`).parent().text())
     }
@@ -191,21 +178,15 @@ const addCheckedMasterTunes = function () {
   let y = x.map((tune) => tune.split(','))
   let titles = []
   let composers = []
-  // console.log('checked tunes are', y)
   y.forEach((arr) => titles.push(arr[0]))
   y.forEach((arr) => composers.push(arr[1]))
-  // console.log('titles', titles)
-  // console.log('composers', composers)
   // let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   let userTunes = []
   store.tunes.forEach((tune) => {
-    console.log(`${tune.title}|${tune.user.id}|${store.user.id}|`)
     if (tune.user.id === store.user.id) {
       userTunes.push(tune)
     }
   })
-  // store.tunes.forEach((tune) => console.log(tune.user.id, store.user.id))
-  console.log('userTunes is', userTunes)
   for (let i = 0; i < titles.length; i++) {
     tuneData = {
       tune: {
@@ -218,7 +199,6 @@ const addCheckedMasterTunes = function () {
     })) {
       api.createTune(tuneData)
         .then(indexAndstore)
-        // .then(() => console.log('Created a tune!'))
       $('#add-success-message').html('Success!')
       $('#add-success').modal('show')
     } else {
@@ -226,20 +206,15 @@ const addCheckedMasterTunes = function () {
       $('#add-success').modal('show')
     }
   }
-    // for (let i = 0; i < checkedTuneIndexes.length; i++) {
-    //   $(`#${i}`).prop('checked', false)
-    // }
   }
   $('.checkbox-inline > input').prop('checked', false)
 }
 // const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.user.id > tune2.user.id) ? tune1 : tune2)
 const deleteCheckedTunes = function () {
   const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.id > tune2.id) ? tune1 : tune2)
-  console.log('greatest tune index is', greatestTuneIndex.id)
   if ($('#my-rep').hasClass('selected')) {
     for (let i = 1; i <= greatestTuneIndex.id; i++) {
       if ($(`#${i}`).prop('checked')) {
-        // console.log('checked tune is', $(`#${i}`).parent().text())
         // deleteIds.push(i)
         api.deleteTune(i)
           .then(onClickMyRepertoire)
@@ -261,19 +236,15 @@ let combinedTunes = []
 const findCommonTunes = function () {
   combinedTunes = []
   let numOfCheckedUsers = checkedUserTunes.length
-  // console.log('number of checked users is', numOfCheckedUsers)
-  // console.log('second checked user tunes is', checkedUserTunes[1])
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
   console.log('flattened user tunes is', flattenedUserTunes)
   // let combinedTunes = []
   for (let i = 0; i < flattenedUserTunes.length; i++) {
     let counter = 0
-    // console.log('counter is', counter)
     for (let j = i; j < flattenedUserTunes.length; j++) {
       // let counter = 0
       if (((flattenedUserTunes[i].title.toUpperCase() === flattenedUserTunes[j].title.toUpperCase()) && (flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].composer.toUpperCase().replace(/\s/g, '')))) {
         counter++
-        // console.log('match found!', counter)
         if (counter === numOfCheckedUsers) {
           combinedTunes.push(flattenedUserTunes[i])
           // console.log('pushed tune is', flattenedUserTunes[i])
@@ -281,7 +252,7 @@ const findCommonTunes = function () {
       }
     }
   }
-  // console.log('combined tunes are', combinedTunes)
+
   // This prevents duplicates but may cause bugs
   // for (let i = 0; i < combinedTunes.length; i++) {
   //   for (let j = 0; j < combinedTunes.length; j++) {
@@ -290,9 +261,6 @@ const findCommonTunes = function () {
   //     }
   //   }
   // }
-
-  // console.log('After mumbojumbo combined tunes are', combinedTunes)
-
   // let combinedTitles = []
   // let combinedComposers = []
   // combinedTunes.forEach(tune => combinedTitles.push(tune.title))
@@ -307,7 +275,6 @@ const findCommonTunes = function () {
 const findOurTunes = function () {
   isUsers = false
   checkedUserTunes = []
-  // console.log('something is checked!!')
   // let checkedUserTunes = []
   for (let i = 1; i <= 5000; i++) {
     if ($(`#${i}`).prop('checked')) {
@@ -319,14 +286,12 @@ const findOurTunes = function () {
       })
     }
   }
-  // console.log('checked user tunes is ', checkedUserTunes)
   findCommonTunes()
 }
 
 const onInputTuneData = function (event) {
   event.preventDefault()
   const newTuneData = getFormFields(this)
-  // console.log('newTuneData is', newTuneData)
 }
 
 // const modsubmit = function (event) {
@@ -334,7 +299,6 @@ const onInputTuneData = function (event) {
 // }
 // const poplulateStoreUserList = function (data) {
 //   store.userList = data
-//   console.log('data is ', data)
 // }
 let isUsers = true
 const onClickOurRep = function () {
@@ -344,31 +308,16 @@ const onClickOurRep = function () {
   $('.add').addClass('disappear')
   $('.remove').addClass('disappear')
   $('.edit').addClass('disappear')
-  // $('.add').removeClass('add')
-  // $('.add').addClass('shared')
-  // $('.shared').on('click', findOurTunes)
   api.indexUsers()
     .then(ui.showUsers)
-    // .then((data) => console.log(data))
-    // .then((data) => {
-    //   store.userList = data
-    // })
-    // .then((data) => console.log('store.userList is', store.userList))
-    // .then(ui.showUsers)
 }
 
 let searchTuneData = {}
 
 const searchTunes = function (tuneArray) {
-  // console.log(tuneArray)
-  // event.preventDefault()
-  // const searchTuneData = getFormFields(this)
   $('#search').trigger('reset')
   const searchField = searchTuneData.credentials.search
-  // console.log('search tunes was clicked')
   let display = `<h6 id="search-message"></h6>`
-  // console.log('getFormFields', getFormFields(this))
-  // console.log(searchTuneData.credentials.search)
   tuneArray.forEach((tune) => {
     if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
       display += `<div><label class="checkbox-inline">
@@ -384,7 +333,6 @@ const onClickSearch = function (event, tuneArray) {
   searchTuneData = getFormFields(this)
   if ($('#full-rep').hasClass('selected')) {
     searchTunes(store.masterTunes)
-    // console.log('my rep selected')
   } else if ($('#my-rep').hasClass('selected')) {
     const tunes = []
     store.tunes.forEach((tune) => {
@@ -397,10 +345,7 @@ const onClickSearch = function (event, tuneArray) {
     $('#search').trigger('reset')
     $('#search-results').removeClass('disappear')
     const searchField = searchTuneData.credentials.search
-    // console.log('search tunes was clicked')
     let display = `<h6 id="search-message"></h6>`
-    // console.log('getFormFields', getFormFields(this))
-    // console.log(searchTuneData.credentials.search)
     store.userList.users.forEach((user) => {
       if ((user.email.toUpperCase().includes(searchField.toUpperCase()) || (searchField.toUpperCase().includes(user.email.toUpperCase())))) {
         display += `<div><label class="checkbox-inline">
@@ -413,10 +358,7 @@ const onClickSearch = function (event, tuneArray) {
     $('#search').trigger('reset')
     $('#search-results').removeClass('disappear')
     const searchField = searchTuneData.credentials.search
-    // console.log('search tunes was clicked')
     let display = `<h6 id="search-message"></h6>`
-    // console.log('getFormFields', getFormFields(this))
-    // console.log(searchTuneData.credentials.search)
     combinedTunes.forEach((tune) => {
       if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
         display += `<div><span>${tune.title}, ${tune.composer}</span></div>`
@@ -472,24 +414,16 @@ const addHandlers = () => {
   $('.add').on('click', addCheckedMasterTunes)
   $('.remove').on('click', deleteCheckedTunes)
   $('.kill-dropdown').click(() => $('#dropdownMenu2').dropdown('toggle'))
-  // $('body').on('click', '.edit', onClickEdit)
   $('.edit').on('click', onClickEdit)
   $('body').on('submit', '#input-tune-data', onClickNew)
   $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
   $('body').on('click', '.shared', findOurTunes)
   $('#our-rep').on('click', onClickOurRep)
   $('.find-our-tunes').on('click', findOurTunes)
-  // $('body').on('submit', '#search', searchTunes)
   $('#search').on('submit', onClickSearch)
   $('.reps').hide()
   $('#search').addClass('disappear')
   $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
-  // $('body').on('click', 'label', () => $('.add').removeClass('disappear'))
-
-    // $('.actions').removeClass('disappear')
-  // $('.input-tune-data').on('submit', onInputTuneData)
-//   $('.input-tune-data').on('submit', (event) => event.preventDefault)
-//   $('.modsub').on('submit', (event) => event.preventDefault)
 }
 
 module.exports = {
