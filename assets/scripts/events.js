@@ -90,7 +90,7 @@ const onClickNew = function (event) {
   //   $('#new-tune-message').html('No Duplicates!')
   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   if (userTunes.every((tune) => {
-    return ((tune.title.toUpperCase() !== tuneData.tune.title.toUpperCase()) || ((tune.composer.toUpperCase() !== tuneData.tune.composer.toUpperCase()) && ((tune.composer.toUpperCase() !== ` ${tuneData.tune.composer.toUpperCase()}`))))
+    return ((tune.title.toUpperCase().replace(/\s/g, '') !== tuneData.tune.title.toUpperCase().replace(/\s/g, '')) || ((tune.composer.toUpperCase().replace(/\s/g, '') !== tuneData.tune.composer.toUpperCase().replace(/\s/g, '')) && ((tune.composer.toUpperCase().replace(/\s/g, '') !== ` ${tuneData.tune.composer.toUpperCase().replace(/\s/g, '')}`))))
   })) {
     api.createTune(tuneData)
       .then(() => $('#new-tune-message').html('Success'))
@@ -116,7 +116,7 @@ const onClickEditSubmit = function (event) {
     if (tuneId === 0) {
       $('#edit-tune-message').html('Check a Tune to Edit')
     } else if (userTunes.every((tune) => {
-      return (tune.title.toUpperCase() !== patchTuneData.tune.title.toUpperCase()) && (tune.composer.toUpperCase() !== patchTuneData.tune.composer.toUpperCase())
+      return ((tune.title.toUpperCase().replace(/\s/g, '') !== patchTuneData.tune.title.toUpperCase().replace(/\s/g, '')) || ((tune.composer.toUpperCase().replace(/\s/g, '') !== patchTuneData.tune.composer.toUpperCase().replace(/\s/g, '')) && ((tune.composer.toUpperCase().replace(/\s/g, '') !== ` ${patchTuneData.tune.composer.toUpperCase().replace(/\s/g, '')}`))))
     })) {
       api.patchTune(tuneId, patchTuneData)
         .then(onClickMyRepertoire)
