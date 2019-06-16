@@ -116,7 +116,7 @@ const showTunes = function (data) {
 const showCombinedTunes = function (combinedTunes) {
   $('.actions').addClass('disappear')
   $('#search-results').addClass('disappear')
-  let display = `<h6>Y'all know ${combinedTunes.length} tunes:</h6>`
+  let display = `<h6>Y'all have ${combinedTunes.length} tunes in common:</h6>`
   for (let i = 0; i < combinedTunes.length; i++) {
     display += `<div id=${i}> ${combinedTunes[i].title}, ${combinedTunes[i].composer}</div>`
   }
