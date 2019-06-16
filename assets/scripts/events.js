@@ -304,6 +304,8 @@ let isUsers = true
 const onClickOurRep = function () {
   isUsers = true
   $('.actions').removeClass('disappear')
+  $('.actions').addClass('rubberBand')
+  $('.actions').addClass('animated')
   $('.shared').removeClass('disappear')
   $('.add').addClass('disappear')
   $('.remove').addClass('disappear')
@@ -424,7 +426,7 @@ const addHandlers = () => {
   $('.reps').hide()
   $('#search').addClass('disappear')
   $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
-  $('.step-one').delay(2000).addClass('enable')
+  // $('.step-one').delay(2000).addClass('enable')
 }
 
 module.exports = {
