@@ -51,8 +51,10 @@ const onClickMyRepertoire = function () {
   $('.add').addClass('new')
   // $('.new').on('click', onClickNew)
   $('.new-tune-waiting').attr('id', 'new-tune')
+  $('svg').removeClass('disappear')
   api.indexTunes()
     .then(ui.showTunes)
+    .then(() => $('svg').addClass('disappear'))
 }
 
 const afterDelete = function () {
@@ -304,8 +306,6 @@ let isUsers = true
 const onClickOurRep = function () {
   isUsers = true
   $('.actions').removeClass('disappear')
-  $('.actions').addClass('rubberBand')
-  $('.actions').addClass('animated')
   $('.shared').removeClass('disappear')
   $('.add').addClass('disappear')
   $('.remove').addClass('disappear')
