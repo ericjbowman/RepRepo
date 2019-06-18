@@ -2,6 +2,15 @@ const store = require('./store')
 const api = require('./api')
 
 const signUpSuccess = function (data) {
+  $('.load-log').addClass('disappear')
+  // $('#sign-up').addClass('animate')
+  // $('#sign-up').addClass('bounceOutRight')
+  // $('#sign-in').addClass('animate')
+  // $('#sign-in').delay(500).queue((next) => {
+  //   $('#sign-in').addClass('slideOutUp')
+  //   next()
+  // })
+  // $('#sign-up').fadeOut('slow')
   $('.step-one').html('Sign-up success')
   $('form').trigger('reset')
 }
@@ -31,6 +40,7 @@ const showMasterTunes = function () {
 }
 
 const signInSuccess = function (data) {
+  $('.load-log').addClass('disappear')
   $('.actions').removeClass('disappear')
   $('#dropdownMenu2').removeClass('disappear')
   $('list-choice').show()
@@ -60,11 +70,13 @@ const signInSuccess = function (data) {
 }
 
 const signInFailure = function () {
+  $('.load-log').addClass('disappear')
   $('form').trigger('reset')
   $('.step-one').html('Sign-in failed')
 }
 
 const signUpFailure = function () {
+  $('.load-log').addClass('disappear')
   $('form').trigger('reset')
   $('.step-one').html('Sign-up failed')
 }

@@ -8,6 +8,7 @@ const store = require('./store')
 const onSignUp = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
+  $('.load-log').removeClass('disappear')
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
@@ -15,6 +16,7 @@ const onSignUp = function (event) {
 
 const onSignIn = function (event) {
   event.preventDefault()
+  $('.load-log').removeClass('disappear')
   // $('#sign-in').html('')
 
   const data = getFormFields(this)
@@ -25,6 +27,7 @@ const onSignIn = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault()
+  $('.load-log').removeClass('disappear')
   api.signOut()
     .then(ui.signOutSuccess)
     // .catch(ui.signOutFailure)
@@ -51,10 +54,10 @@ const onClickMyRepertoire = function () {
   $('.add').addClass('new')
   // $('.new').on('click', onClickNew)
   $('.new-tune-waiting').attr('id', 'new-tune')
-  $('svg').removeClass('disappear')
+  $('.load-tunes').removeClass('disappear')
   api.indexTunes()
     .then(ui.showTunes)
-    .then(() => $('svg').addClass('disappear'))
+    .then(() => $('.load-tunes').addClass('disappear'))
 }
 
 const afterDelete = function () {

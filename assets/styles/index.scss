@@ -20,7 +20,14 @@ p, .log-field, .search {
 }
 
 #log-message {
+  position: absolute;
+  top: 0;
   margin-bottom: 4em;
+  // z-index: -1;
+}
+
+.rel {
+  position: relative;
 }
 
 #image {
@@ -242,9 +249,21 @@ h4:hover::after {
   cursor: pointer;
 }
 
-svg {
-  margin-left: 20px;
-  width: 3.75em;
+.load-log {
+  position: relative;
+  margin-left: -1.25em;
+  left: 50%;
+}
+
+.load-tunes {
+  position: relative;
+  left: 50%;
+  margin-left: -1.25em;
+  z-index: 1;
+}
+
+.load-tunes, .load-log {
+  width: 3.5em;
   transform-origin: center;
   animation: rotate 2s linear infinite;
 }
