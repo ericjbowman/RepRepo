@@ -60,10 +60,11 @@ const onClickMyRepertoire = function () {
     .then(() => $('.load-tunes').addClass('disappear'))
 }
 
-const afterDelete = function () {
-  api.indexTunes()
-    .then(ui.showTunes)
-}
+// const afterDelete = function () {
+//   api.indexTunes()
+//     .then(ui.showTunes)
+// }
+
 let tuneData = {
   tune: {
     title: 'Sample',
@@ -176,6 +177,9 @@ const addCheckedMasterTunes = function () {
     if ($(`#${i}`).prop('checked')) {
       checkedTuneIndexes.push(i)
       checkedTunes.push($(`#${i}`).parent().text())
+    } else {
+      $('#add-success-message').html('You must check at least 1 tune')
+      $('#add-success').modal('show')
     }
   }
 

@@ -168,6 +168,7 @@ const showUsers = function (data) {
 }
 
 const signOutSuccess = function () {
+  $('.load-log').addClass('disappear')
   $('#search-results').addClass('disappear')
   $('#image').addClass('disappear')
   $('#dropdownMenu2').addClass('disappear')
