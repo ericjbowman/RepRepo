@@ -5,6 +5,8 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+let numChecked = 0
+
 const onSignUp = function (event) {
   event.preventDefault()
   const data = getFormFields(this)
@@ -142,14 +144,22 @@ const storeTunes = function (data) {
   store.tunes = data.tunes
 }
 
+
 const onClickEdit = function () {
+  $('#edit-tune-data').removeClass('disappear')
+  $('#edit-tune-message').html('Edit a tune')
   tuneId = 0
+  numChecked = 0
   $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
     for (let i = 1; i <= 5000; i++) {
       if ($(`#${i}`).prop('checked')) {
         tuneId = i
+        numChecked++
       }
+    } if (numChecked !== 1) {
+      $('#edit-tune-data').addClass('disappear')
+      $('#edit-tune-message').html('Check 1 tune')
     }
   }
 }
@@ -254,7 +264,7 @@ const findCommonTunes = function () {
     let counter = 0
     for (let j = i; j < flattenedUserTunes.length; j++) {
       // let counter = 0
-      if (((flattenedUserTunes[i].title.toUpperCase() === flattenedUserTunes[j].title.toUpperCase()) && (flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].composer.toUpperCase().replace(/\s/g, '')))) {
+      if (((flattenedUserTunes[i].title.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].title.toUpperCase().replace(/\s/g, '')) && (flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].composer.toUpperCase().replace(/\s/g, '')))) {
         counter++
         if (counter === numOfCheckedUsers) {
           combinedTunes.push(flattenedUserTunes[i])
@@ -298,6 +308,7 @@ const findOurTunes = function () {
     }
   }
   if (checkedUserTunes.length > 1) {
+    $('form').trigger('reset')
     findCommonTunes()
   } else {
     $('#add-success-message').html('Check 2 or more users')
@@ -335,7 +346,7 @@ const searchTunes = function (tuneArray) {
   const searchField = searchTuneData.credentials.search
   let display = `<h6 id="search-message"></h6>`
   tuneArray.forEach((tune) => {
-    if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
+    if (((tune.title.toUpperCase().replace(/\s/g, '').includes(searchField.toUpperCase().replace(/\s/g, ''))) || (tune.composer.toUpperCase().replace(/\s/g, '').includes(searchField.toUpperCase().replace(/\s/g, '')))) || ((searchField.toUpperCase().replace(/\s/g, '').includes(tune.title.toUpperCase().replace(/\s/g, ''))) || (searchField.toUpperCase().replace(/\s/g, '').includes(tune.composer.toUpperCase().replace(/\s/g, ''))))) {
       display += `<div><label class="checkbox-inline">
       <input type="checkbox" value="" id=${tune.id}> ${tune.title}, ${tune.composer}</label></div>`
     }
@@ -363,7 +374,7 @@ const onClickSearch = function (event, tuneArray) {
     const searchField = searchTuneData.credentials.search
     let display = `<h6 id="search-message"></h6>`
     store.userList.users.forEach((user) => {
-      if ((user.email.toUpperCase().includes(searchField.toUpperCase()) || (searchField.toUpperCase().includes(user.email.toUpperCase())))) {
+      if ((user.email.toUpperCase().replace(/\s/g, '').includes(searchField.toUpperCase().replace(/\s/g, '')) || (searchField.toUpperCase().replace(/\s/g, '').includes(user.email.toUpperCase().replace(/\s/g, ''))))) {
         display += `<div><label class="checkbox-inline">
           <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
       }
@@ -377,7 +388,7 @@ const onClickSearch = function (event, tuneArray) {
     const searchField = searchTuneData.credentials.search
     let display = `<h6 id="search-message"></h6>`
     combinedTunes.forEach((tune) => {
-      if (((tune.title.toUpperCase().includes(searchField.toUpperCase())) || (tune.composer.toUpperCase().includes(searchField.toUpperCase()))) || ((searchField.toUpperCase().includes(tune.title.toUpperCase())) || (searchField.toUpperCase().includes(tune.composer.toUpperCase())))) {
+      if (((tune.title.toUpperCase().replace(/\s/g, '').includes(searchField.toUpperCase().replace(/\s/g, ''))) || (tune.composer.toUpperCase().replace(/\s/g, '').includes(searchField.toUpperCase().replace(/\s/g, '')))) || ((searchField.toUpperCase().replace(/\s/g, '').includes(tune.title.toUpperCase().replace(/\s/g, ''))) || (searchField.toUpperCase().replace(/\s/g, '').includes(tune.composer.toUpperCase().replace(/\s/g, ''))))) {
         display += `<div><span>${tune.title}, ${tune.composer}</span></div>`
       }
     })
