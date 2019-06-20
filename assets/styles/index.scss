@@ -19,12 +19,12 @@ p, .log-field, .search {
   font-weight: 300;
 }
 
-// #log-message {
-//   position: absolute;
-//   top: 0;
-//   margin-bottom: 4em;
-//   // z-index: -1;
-// }
+#log-message {
+  // position: absolute;
+  // top: 0;
+  margin-bottom: 4em;
+  // z-index: -1;
+}
 
 .dont-move {
   position: absolute;
