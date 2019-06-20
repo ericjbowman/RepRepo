@@ -16,6 +16,7 @@ const signUpSuccess = function (data) {
 }
 
 const showMasterTunes = function () {
+  $('#log-message').addClass('dont-move')
   let display = '<h6>Check standards you know and click "Add to Repertoire"</h6>'
   store.masterTunes.forEach(tune => {
     display += `<div><label class="checkbox-inline">
@@ -148,7 +149,7 @@ const showUsers = function (data) {
   let emailList = []
   store.userList = data
   store.userList.users.forEach(tune => emailList.push(tune.email))
-  let display = '<p class="user-search"</p><h6>Choose Users and click "Create Shared Repertoire":</h6>'
+  let display = '<h6>Choose Users and click "Create Shared Repertoire":</h6>'
   const alphaUsers = store.userList.users.sort(function (a, b) {
     let nameA = a.email.toUpperCase()
     let nameB = b.email.toUpperCase()

@@ -42,7 +42,9 @@ const onChangePassword = function (event) {
 }
 
 const onClickMyRepertoire = function () {
-  // $('.shared').addClass('add')
+  $('#search-results').html('')
+  $('#log-message').html('')
+  $('#log-message').addClass('dont-move')
   $('.actions').removeClass('disappear')
   $('.shared').addClass('disappear')
   $('.remove').addClass('col-4')
@@ -178,7 +180,7 @@ const addCheckedMasterTunes = function () {
       checkedTuneIndexes.push(i)
       checkedTunes.push($(`#${i}`).parent().text())
     } else {
-      $('#add-success-message').html('You must check at least 1 tune')
+      $('#add-success-message').html('Check at least 1 tune')
       $('#add-success').modal('show')
     }
   }
@@ -233,7 +235,7 @@ const deleteCheckedTunes = function () {
           })
           // .catch(() => console.log('Delete failed'))
       } else {
-        $('#add-success-message').html('You must check at least 1 tune')
+        $('#add-success-message').html('Check at least 1 tune')
         $('#add-success').modal('show')
       }
     }
@@ -366,6 +368,7 @@ const onClickSearch = function (event, tuneArray) {
           <input type="checkbox" value="" id=${user.id}> ${user.email}</label></div>`
       }
     })
+    $('#log-message').removeClass('dont-move')
     $('#search-results').html(`${display}`)
     $('#search-message').text('Search results for: ' + searchField)
   } else if ($('#our-rep').hasClass('selected') && isUsers === false) {
