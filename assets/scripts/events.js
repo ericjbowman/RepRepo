@@ -295,7 +295,12 @@ const findOurTunes = function () {
       })
     }
   }
-  findCommonTunes()
+  if (checkedUserTunes.length > 1) {
+    findCommonTunes()
+  } else {
+    $('#add-success-message').html('Check 2 or more users')
+    $('#add-success').modal('show')
+  }
 }
 
 const onInputTuneData = function (event) {
