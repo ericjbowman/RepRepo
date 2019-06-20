@@ -206,7 +206,7 @@ const addCheckedMasterTunes = function () {
       }
     }
     if (userTunes.every((tune) => {
-      return (tune.title !== tuneData.tune.title) || (tune.composer !== tuneData.tune.composer)
+      return (tune.title.toUpperCase().replace(/\s/g, '') !== tuneData.tune.title.toUpperCase().replace(/\s/g, '')) || (tune.composer.toUpperCase().replace(/\s/g, '') !== tuneData.tune.composer.toUpperCase().replace(/\s/g, ''))
     })) {
       api.createTune(tuneData)
         .then(indexAndstore)
