@@ -146,13 +146,14 @@ const storeTunes = function (data) {
 
 
 const onClickEdit = function () {
+  const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.id > tune2.id) ? tune1 : tune2)
   $('#edit-tune-data').removeClass('disappear')
   $('#edit-tune-message').html('Edit a tune')
   tuneId = 0
   numChecked = 0
   $('#edit-tune-message').html('Edit a tune')
   if ($('#my-rep').hasClass('selected')) {
-    for (let i = 1; i <= 5000; i++) {
+    for (let i = 1; i <= greatestTuneIndex.id; i++) {
       if ($(`#${i}`).prop('checked')) {
         tuneId = i
         numChecked++
@@ -294,10 +295,11 @@ const findCommonTunes = function () {
 }
 
 const findOurTunes = function () {
+  const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.id > tune2.id) ? tune1 : tune2)
   isUsers = false
   checkedUserTunes = []
   // let checkedUserTunes = []
-  for (let i = 1; i <= 5000; i++) {
+  for (let i = 1; i <= greatestTuneIndex.id; i++) {
     if ($(`#${i}`).prop('checked')) {
       // console.log('something is checked!!')
       store.userList.users.forEach(user => {
