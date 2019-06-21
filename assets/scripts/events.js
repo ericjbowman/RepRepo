@@ -447,7 +447,7 @@ const addHandlers = () => {
   $('.edit').on('click', onClickEdit)
   $('body').on('submit', '#input-tune-data', onClickNew)
   $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
-  $('body').on('click', '.shared', findOurTunes)
+  // $('body').on('click', '.shared', findOurTunes)
   $('.shared').on('click', findOurTunes)
   $('#our-rep').on('click', onClickOurRep)
   $('.find-our-tunes').on('click', findOurTunes)
