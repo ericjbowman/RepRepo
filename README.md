@@ -9,7 +9,7 @@ I planned this app for a phone by making a wireframe for a vertical screen. Then
 User Stories:
 As an avid jazz musician, I would like to keep track of songs I know.
 As a gigging musician, I would like to know which songs the whole band knows to create set lists.
-As a musician who frequents jam sessions, I would like to an app to randomly generate a song that I know so that I don't have to think about what to call.
+As a musician who frequents jam sessions, I would like to search tunes by composer to find what songs by a certain composer I know.
 As a music educator, I want an app to keep track of my students repetoire.
 
 Wireframe:

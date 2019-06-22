@@ -23,7 +23,6 @@ p, .log-field, .search {
   // position: absolute;
   // top: 0;
   margin-bottom: 4em;
-  // z-index: -1;
 }
 
 .dont-move {
@@ -103,6 +102,10 @@ footer {
 
 .reps:hover {
   color: green;
+  cursor: pointer;
+}
+
+.app-name:hover {
   cursor: pointer;
 }
 
@@ -493,13 +496,21 @@ circle {
     width: 75%;
   }
 
+  #log-message {
+    margin-bottom: 6em;
+  }
+
   // .initLog-headers {
   //   margin: 0 auto
   // }
 
-  h4, h3 {
+  h4, h3, {
     font-size: 16px;
     text-align: center;
+  }
+
+  input, h6 {
+    font-size: 14px;
   }
 
   label {

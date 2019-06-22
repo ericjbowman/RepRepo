@@ -354,7 +354,7 @@ const searchTunes = function (tuneArray) {
     }
   })
   $('#log-message').html(`${display}`)
-  $('#search-message').text('Search results for: ' + searchField)
+  $('#search-message').text('Search results for: ' + '"' + searchField + '"')
 }
 
 const onClickSearch = function (event, tuneArray) {
@@ -383,7 +383,7 @@ const onClickSearch = function (event, tuneArray) {
     })
     $('#log-message').removeClass('dont-move')
     $('#search-results').html(`${display}`)
-    $('#search-message').text('Search results for: ' + searchField)
+    $('#search-message').text('Search results for: ' + '"' + searchField + '"')
   } else if ($('#our-rep').hasClass('selected') && isUsers === false) {
     $('#search').trigger('reset')
     $('#search-results').removeClass('disappear')
@@ -395,7 +395,7 @@ const onClickSearch = function (event, tuneArray) {
       }
     })
     $('#search-results').html(`${display}`)
-    $('#search-message').text('Search results for: ' + searchField)
+    $('#search-message').text('Search results for: ' + '"' + searchField + '"')
   }
 }
 
@@ -455,6 +455,7 @@ const addHandlers = () => {
   $('.reps').hide()
   $('#search').addClass('disappear')
   $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
+  $('.app-name').on('click', () => $('*').scrollTop(0))
   // $('.step-one').delay(2000).addClass('enable')
 }
 
