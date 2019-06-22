@@ -178,7 +178,7 @@ const signOutSuccess = function () {
   $('#sign-up').show()
   $('#sign-in').show()
   $('#log-message').html('')
-  $('.step-one').html('Sign in to access repertoire')
+  $('.step-one').html('Signed Out! Sign in to access repertoire')
   $('.step-one').show()
   $('.reps').removeClass('selected')
   $('.action').addClass('disappear')
