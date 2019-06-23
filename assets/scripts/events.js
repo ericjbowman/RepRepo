@@ -64,11 +64,6 @@ const onClickMyRepertoire = function () {
     .then(() => $('.load-tunes').addClass('disappear'))
 }
 
-// const afterDelete = function () {
-//   api.indexTunes()
-//     .then(ui.showTunes)
-// }
-
 let tuneData = {
   tune: {
     title: 'Sample',
@@ -165,18 +160,6 @@ const onClickEdit = function () {
   }
 }
 
-// const onClickActions = function (event) {
-//   $('#edit-tune-data').on('submit', function (event) {
-//     event.preventDefault()
-//   })
-//   $('#input-tune-data').on('submit', function (event) {
-//     event.preventDefault()
-//   })
-//   // $('#input-tune-data').on('submit', onClickNew)
-//   // $('.remove').on('click', deleteCheckedTunes)
-//   // $('#edit-tune-data').on('submit', onClickEdit)
-//   // $('.actions').on('submit', '#input-tune-data', )
-// }
 let checkedTunes = []
 let checkedTuneIndexes = []
 const indexAndstore = function () {
@@ -259,7 +242,6 @@ const findCommonTunes = function () {
   combinedTunes = []
   let numOfCheckedUsers = checkedUserTunes.length
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
-  console.log('flattened user tunes is', flattenedUserTunes)
   // let combinedTunes = []
   for (let i = 0; i < flattenedUserTunes.length; i++) {
     let counter = 0
@@ -274,23 +256,6 @@ const findCommonTunes = function () {
       }
     }
   }
-
-  // This prevents duplicates but may cause bugs
-  // for (let i = 0; i < combinedTunes.length; i++) {
-  //   for (let j = 0; j < combinedTunes.length; j++) {
-  //     if (combinedTunes[i].title === combinedTunes[j].title) {
-  //       combinedTunes.splice(i, 1)
-  //     }
-  //   }
-  // }
-  // let combinedTitles = []
-  // let combinedComposers = []
-  // combinedTunes.forEach(tune => combinedTitles.push(tune.title))
-  // combinedTunes.forEach(tune => combinedComposers.push(tune.composer))
-  // let combinedUniqueTitles = [...new Set(combinedTitles)]
-  // let combinedUniqueComposers = [...new Set(combinedComposers)]
-  // If there are duplicate composers, combinedUniqueComposers will come up short.
-  // Use the Id of the tunes to get the composer in the ui
   ui.showCombinedTunes(combinedTunes)
 }
 
@@ -398,41 +363,6 @@ const onClickSearch = function (event, tuneArray) {
     $('#search-message').text('Search results for: ' + '"' + searchField + '"')
   }
 }
-
-// const deleteDuplicatesForUserTunes = function (data) {
-//   store.tunes = data.tunes
-//   let dupArray = []
-//   let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-//   userTunes.sort(function (a, b) {
-//     let nameA = a.title.toUpperCase()
-//     let nameB = b.title.toUpperCase()
-//     if (nameA < nameB) {
-//       return -1
-//     }
-//     if (nameA > nameB) {
-//       return 1
-//     }
-//     return 0
-//   })
-//   console.log('delete dup ran')
-//   for (let i = 0; i < userTunes.length - 1; i++) {
-//     console.log(userTunes[i])
-//     if ((userTunes[i].title === userTunes[i + 1].title) && (userTunes[i].composer === userTunes[i + 1].composer)) {
-//       console.log('duplicate found in user tunes', userTunes[i].title)
-//       dupArray.push(i)
-//       console.log('dupArray is', dupArray)
-//       // api.deleteTune(userTunes[i].id)
-//       //   .then(onClickMyRepertoire)
-//     }
-//   }
-//
-//   dupArray.forEach((indexOfDupe) => {
-//     console.log(userTunes[indexOfDupe])
-//     api.deleteTune(userTunes[indexOfDupe].id)
-//       .then(() => console.log('duplicate deleted', userTunes[indexOfDupe].title))
-//       .then(afterDelete)
-//   })
-// }
 
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
