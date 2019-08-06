@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>RepRepo</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Montserrat+Alternates|Righteous&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto|Roboto+Slab:300,400&display=swap" rel="stylesheet">
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <nav id="top-nav">
+        <div class="app-name">RepRepo</div>
+        <form id="search" class="form-inline my-2 my-lg-0 search-bar disappear">
+          <input class="form-control mr-sm-2 search" type="text" placeholder="Search" name="credentials[search]" maxlength="40" aria-label="Search">
+          <!-- <button class="btn btn-outline-success my-2 my-sm-0 search" type="submit">Search</button> -->
+          <input type="submit" value="Search" class="btn btn-outline-success">
+        </form>
+        <div class="nav-buttons">
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle disappear" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </button>
+            <div class="dropdown-menu">
+            <form id="change-password" class="dropdown-item">
+              <div class="account-line">
+                <input type="password" name="passwords[old]" placeholder="Old Password" class="log-field">
+              </div>
+              <div class="account-line">
+                <input type="password" name="passwords[new]" placeholder="New Password" class="log-field">
+              </div>
+              <div>
+                <input type="submit" value="Change Password" class="btn btn-success btn-block">
+              </div>
+            </form>
+              <form id="sign-out" class="dropdown-item">
+                <input type="submit" value="Sign out" class="btn btn-success btn-block kill-dropdown">
+              </form>
+              <div class="dropdown-footer">
+                <p class="dropdown-item change-password-message"></p>
+              </div>
+            </div>
+          </div>
+          <!-- <form id="sign-out" class="disappear">
+            <input type="submit" value="Sign out" class="btn">
+          </form> -->
+        </div>
+      </nav>
+      <div class="list-choice container-fluid">
+        <h3 class="step-one rubberBand animated">Welcome to Repertoire Repository</h3>
+        <h4 id="full-rep" class="reps">Full Repertoire</h4>
+        <h4 id="my-rep" class="reps">My Repertoire</h4>
+        <h4 id="our-rep" class="reps">Our Repertoire</h4>
+      </div>
+      <hr />
+      <main>
+      <div class="initLog">
+      <form id="sign-up">
+        <h3 class="initLog-headers">Sign up</h3>
+          <input class="third log-field" type="text" name="credentials[email]" maxlength="40" placeholder="Username">
+          <input class="third log-field" type="password" name="credentials[password]" maxlength="40" placeholder="Password">
+          <input class="third log-field" type="password" name="credentials[password_confirmation]" maxlength="40" placeholder="Confirm Password">
+          <br><input type="submit" value="Sign up" class="btn btn-success btn-block">
+      </form>
+      <form id="sign-in">
+        <h3 class="initLog-headers">Sign in</h3>
+          <input class="third log-field" type="text" name="credentials[email]" maxlength="40" placeholder="Username">
+          <input class="third log-field" type="password" name="credentials[password]" maxlength="40" placeholder="Password">
+          <br><input type="submit" value="Sign in" class="btn btn-success btn-block third">
+      </form>
+      <svg class="load-log disappear" viewBox="25 25 50 50">
+        <circle cx="50" cy="50" r="20"></circle>
+      </svg>
+      </div>
+      <div class="rel">
+        <svg class="load-tunes disappear" viewBox="25 25 50 50">
+          <circle cx="50" cy="50" r="20"></circle>
+        </svg>
+        <p id="search-results"></p>
+        <p id="log-message" class="dont-move"></p>
+      </div>
+      <div class="col-12 index-master-tunes">
+        <p class="master_tunes"></p>
+      </div>
+      </main>
+        <div class="actions container-fluid">
+          <span class="sp action disappear add" data-toggle="modal" data-target="#new-tune">Add</span>
+          <span class="sp action disappear remove">Remove</span>
+          <span class="sp action disappear edit" data-toggle="modal" data-target="#edit-tune">Edit</span>
+          <span class="sp disappear shared">Get Shared Repertoire</span>
+        </div>
+        <div id="image" class="disappear">
+          <img src="https://cdn.nybooks.com/wp-content/uploads/2016/09/shatz_2-092916.jpg" alt="Miles Vibin You">
+        </div>
+        <!-- modals -->
+        <div class="modal fade" id="edit-tune">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 id="edit-tune-message">Edit Tune</h3>
+              </div>
+              <div class="modal-body pwBody">
+                <form id="edit-tune-data">
+                  <input type="text" name="title" maxlength="40" placeholder="Title">
+                  <input type="text" name="composer" maxlength="40" placeholder="Composer">
+                  <input type="submit" value="Edit" class="btn btn-success">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <p class="onEditTuneInput"><p>
+                <button type="button" class="btn btn-success btn-block cls" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade new-tune-waiting">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 id="new-tune-message">New Tune</h3>
+              </div>
+              <div class="modal-body pwBody">
+                <form id="input-tune-data">
+                  <input type="text" name="title" maxlength="40" placeholder="Title">
+                  <input type="text" name="composer" maxlength="40" placeholder="Composer">
+                  <input type="submit" value="Enter" class="btn btn-success modsub">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <p class="onNewTuneInput"><p>
+                <button type="button" class="btn btn-success btn-block cls" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="add-success">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h3 id="add-success-message">Success!</h3>
+                <button type="button" class="btn btn-success btn-block cls" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+<!--
+<nav class="navbar navbar-expand-lg navbar-light bg-light top">
+  <a class="navbar-brand">RepRepo</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Account</a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
