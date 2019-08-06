@@ -9,6 +9,8 @@ const events = require('./events.js')
 // require('./example')
 
 $(() => {
+  const https = require('https')
+  https.get('https://fast-fjord-28821.herokuapp.com')
   events.addHandlers()
   // $('list-choice').hide()
   // $('.edit').on('click', '#edit-tune-data', data, events.onClickEdit(data))
