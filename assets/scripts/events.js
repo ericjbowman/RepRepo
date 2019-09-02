@@ -19,8 +19,6 @@ const onSignUp = function (event) {
 const onSignIn = function (event) {
   event.preventDefault()
   $('.load-log').removeClass('disappear')
-  // $('#sign-in').html('')
-
   const data = getFormFields(this)
   api.signIn(data)
     .then(ui.signInSuccess)
@@ -32,7 +30,6 @@ const onSignOut = function (event) {
   $('.load-log').removeClass('disappear')
   api.signOut()
     .then(ui.signOutSuccess)
-    // .catch(ui.signOutFailure)
 }
 
 const onChangePassword = function (event) {
@@ -85,25 +82,19 @@ const onClickNew = function (event) {
   event.preventDefault()
   if ($('#my-rep').hasClass('selected')) {
     const input = getFormFields(this)
-    // console.log('input is', input)
     tuneData.tune.title = input.title
     tuneData.tune.composer = input.composer
-    // console.log('tune data is', tuneData)
-  // if (store.tunes.some((storeTune) => {
-  //   return ((storeTune.title === tuneData.tune.title) && (storeTune.composer === tuneData.tune.composer))
-  // })) {
-  //   $('#new-tune-message').html('No Duplicates!')
-  let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-  if (userTunes.every((tune) => {
-    return ((tune.title.toUpperCase().replace(/\s/g, '') !== tuneData.tune.title.toUpperCase().replace(/\s/g, '')) || ((tune.composer.toUpperCase().replace(/\s/g, '') !== tuneData.tune.composer.toUpperCase().replace(/\s/g, '')) && ((tune.composer.toUpperCase().replace(/\s/g, '') !== ` ${tuneData.tune.composer.toUpperCase().replace(/\s/g, '')}`))))
-  })) {
-    api.createTune(tuneData)
-      .then(() => $('#new-tune-message').html('Success'))
-      .then(api.indexTunes)
-      .then(ui.showTunes)
-      .then(onClickMyRepertoire)
-      .then(() => $('form').trigger('reset'))
-      .catch(() => $('#new-tune-message').html('Failure'))
+    const userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+    if (userTunes.every((tune) => {
+      return ((tune.title.toUpperCase().replace(/\s/g, '') !== tuneData.tune.title.toUpperCase().replace(/\s/g, '')) || ((tune.composer.toUpperCase().replace(/\s/g, '') !== tuneData.tune.composer.toUpperCase().replace(/\s/g, '')) && ((tune.composer.toUpperCase().replace(/\s/g, '') !== ` ${tuneData.tune.composer.toUpperCase().replace(/\s/g, '')}`))))
+    })) {
+      api.createTune(tuneData)
+        .then(() => $('#new-tune-message').html('Success'))
+        .then(api.indexTunes)
+        .then(ui.showTunes)
+        .then(onClickMyRepertoire)
+        .then(() => $('form').trigger('reset'))
+        .catch(() => $('#new-tune-message').html('Failure'))
     } else {
       $('#new-tune-message').html('That tune already exists!')
       $('form').trigger('reset')
@@ -117,7 +108,7 @@ const onClickEditSubmit = function (event) {
   patchTuneData.tune.title = input.title
   patchTuneData.tune.composer = input.composer
   if ($('#my-rep').hasClass('selected')) {
-    let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
+    const userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
     if (tuneId === 0) {
       $('#edit-tune-message').html('Check a Tune to Edit')
     } else if (userTunes.every((tune) => {
@@ -138,7 +129,6 @@ const onClickEditSubmit = function (event) {
 const storeTunes = function (data) {
   store.tunes = data.tunes
 }
-
 
 const onClickEdit = function () {
   const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.id > tune2.id) ? tune1 : tune2)
@@ -161,73 +151,70 @@ const onClickEdit = function () {
 }
 
 let checkedTunes = []
-let checkedTuneIndexes = []
+const checkedTuneIndexes = []
 const indexAndstore = function () {
   api.indexTunes()
     .then(storeTunes)
 }
 const addCheckedMasterTunes = function () {
   if ($('#full-rep').hasClass('selected')) {
-  checkedTunes = []
-  for (let i = 1; i <= store.masterTunes.length; i++) {
-    if ($(`#${i}`).prop('checked')) {
-      checkedTuneIndexes.push(i)
-      checkedTunes.push($(`#${i}`).parent().text())
-    } else {
-      $('#add-success-message').html('Check at least 1 tune')
-      $('#add-success').modal('show')
-    }
-  }
-
-  let x = checkedTunes.map((tune) => tune.trim())
-  let y = x.map((tune) => tune.split(','))
-  let titles = []
-  let composers = []
-  y.forEach((arr) => titles.push(arr[0]))
-  y.forEach((arr) => composers.push(arr[1]))
-  // let userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
-  let userTunes = []
-  store.tunes.forEach((tune) => {
-    if (tune.user.id === store.user.id) {
-      userTunes.push(tune)
-    }
-  })
-  for (let i = 0; i < titles.length; i++) {
-    tuneData = {
-      tune: {
-        title: `${titles[i]}`,
-        composer: `${composers[i]}`
+    checkedTunes = []
+    for (let i = 1; i <= store.masterTunes.length; i++) {
+      if ($(`#${i}`).prop('checked')) {
+        checkedTuneIndexes.push(i)
+        checkedTunes.push($(`#${i}`).parent().text())
+      } else {
+        $('#add-success-message').html('Check at least 1 tune')
+        $('#add-success').modal('show')
       }
     }
-    if (userTunes.every((tune) => {
-      return (tune.title.toUpperCase().replace(/\s/g, '') !== tuneData.tune.title.toUpperCase().replace(/\s/g, '')) || (tune.composer.toUpperCase().replace(/\s/g, '') !== tuneData.tune.composer.toUpperCase().replace(/\s/g, ''))
-    })) {
-      api.createTune(tuneData)
-        .then(indexAndstore)
-      $('#add-success-message').html('Success!')
-      $('#add-success').modal('show')
-    } else {
-      $('#add-success-message').html('Choose New Tunes!')
-      $('#add-success').modal('show')
+
+    const x = checkedTunes.map((tune) => tune.trim())
+    const y = x.map((tune) => tune.split(','))
+    const titles = []
+    const composers = []
+    y.forEach((arr) => titles.push(arr[0]))
+    y.forEach((arr) => composers.push(arr[1]))
+    const userTunes = []
+    store.tunes.forEach((tune) => {
+      if (tune.user.id === store.user.id) {
+        userTunes.push(tune)
+      }
+    })
+    for (let i = 0; i < titles.length; i++) {
+      tuneData = {
+        tune: {
+          title: `${titles[i]}`,
+          composer: `${composers[i]}`
+        }
+      }
+      if (userTunes.every((tune) => {
+        return (tune.title.toUpperCase().replace(/\s/g, '') !== tuneData.tune.title.toUpperCase().replace(/\s/g, '')) || (tune.composer.toUpperCase().replace(/\s/g, '') !== tuneData.tune.composer.toUpperCase().replace(/\s/g, ''))
+      })) {
+        api.createTune(tuneData)
+          .then(indexAndstore)
+        $('#add-success-message').html('Success!')
+        $('#add-success').modal('show')
+      } else {
+        $('#add-success-message').html('Choose New Tunes!')
+        $('#add-success').modal('show')
+      }
     }
-  }
   }
   $('.checkbox-inline > input').prop('checked', false)
 }
-// const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.user.id > tune2.user.id) ? tune1 : tune2)
+
 const deleteCheckedTunes = function () {
   const greatestTuneIndex = store.tunes.reduce((tune1, tune2) => (tune1.id > tune2.id) ? tune1 : tune2)
   if ($('#my-rep').hasClass('selected')) {
     for (let i = 1; i <= greatestTuneIndex.id; i++) {
       if ($(`#${i}`).prop('checked')) {
-        // deleteIds.push(i)
         api.deleteTune(i)
           .then(onClickMyRepertoire)
           .then(() => {
             $('#add-success-message').html('Success!')
             $('#add-success').modal('show')
           })
-          // .catch(() => console.log('Delete failed'))
       } else {
         $('#add-success-message').html('Check at least 1 tune')
         $('#add-success').modal('show')
@@ -237,21 +224,17 @@ const deleteCheckedTunes = function () {
 }
 let checkedUserTunes = []
 let combinedTunes = []
-// combinedTunes is an array of arrays, each array is all of users tunes
 const findCommonTunes = function () {
   combinedTunes = []
-  let numOfCheckedUsers = checkedUserTunes.length
+  const numOfCheckedUsers = checkedUserTunes.length
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
-  // let combinedTunes = []
   for (let i = 0; i < flattenedUserTunes.length; i++) {
     let counter = 0
     for (let j = i; j < flattenedUserTunes.length; j++) {
-      // let counter = 0
       if (((flattenedUserTunes[i].title.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].title.toUpperCase().replace(/\s/g, '')) && (flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].composer.toUpperCase().replace(/\s/g, '')))) {
         counter++
         if (counter === numOfCheckedUsers) {
           combinedTunes.push(flattenedUserTunes[i])
-          // console.log('pushed tune is', flattenedUserTunes[i])
         }
       }
     }
@@ -288,12 +271,6 @@ const onInputTuneData = function (event) {
   const newTuneData = getFormFields(this)
 }
 
-// const modsubmit = function (event) {
-//   event.preventDefault()
-// }
-// const poplulateStoreUserList = function (data) {
-//   store.userList = data
-// }
 let isUsers = true
 const onClickOurRep = function () {
   isUsers = true
@@ -377,7 +354,6 @@ const addHandlers = () => {
   $('.edit').on('click', onClickEdit)
   $('body').on('submit', '#input-tune-data', onClickNew)
   $('body').on('submit', '#edit-tune-data', onClickEditSubmit)
-  // $('body').on('click', '.shared', findOurTunes)
   $('.shared').on('click', findOurTunes)
   $('#our-rep').on('click', onClickOurRep)
   $('.find-our-tunes').on('click', findOurTunes)
@@ -386,7 +362,6 @@ const addHandlers = () => {
   $('#search').addClass('disappear')
   $('body').on('click', '.new', () => $('#new-tune-message').html('New Tune'))
   $('.app-name').on('click', () => $('*').scrollTop(0))
-  // $('.step-one').delay(2000).addClass('enable')
 }
 
 module.exports = {
