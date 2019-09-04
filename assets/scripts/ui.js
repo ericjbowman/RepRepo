@@ -3,14 +3,6 @@ const api = require('./api')
 
 const signUpSuccess = function (data) {
   $('.load-log').addClass('disappear')
-  // $('#sign-up').addClass('animate')
-  // $('#sign-up').addClass('bounceOutRight')
-  // $('#sign-in').addClass('animate')
-  // $('#sign-in').delay(500).queue((next) => {
-  //   $('#sign-in').addClass('slideOutUp')
-  //   next()
-  // })
-  // $('#sign-up').fadeOut('slow')
   $('.step-one').html('Sign-up success')
   $('form').trigger('reset')
 }
@@ -37,7 +29,6 @@ const showMasterTunes = function () {
   $('#image').addClass('disappear')
   $('#search').removeClass('disappear')
   $('#search-results').addClass('disappear')
-  // $('#2').addClass('selected')
 }
 
 const signInSuccess = function (data) {
@@ -87,8 +78,8 @@ const showTunes = function (data) {
   let userTunes = []
   userTunes = store.tunes.filter((tune) => tune.user.id === store.user.id)
   userTunes.sort(function (a, b) {
-    let nameA = a.title.toUpperCase()
-    let nameB = b.title.toUpperCase()
+    const nameA = a.title.toUpperCase()
+    const nameB = b.title.toUpperCase()
     if (nameA < nameB) {
       return -1
     }
@@ -97,17 +88,6 @@ const showTunes = function (data) {
     }
     return 0
   })
-  // for (let i = 0; i < userTunes.length; i++) {
-  //   for (let j = 0; j < userTunes.length; j++) {
-  //     if (userTunes[i].title === userTunes[j].title) {
-  //       userTunes.splice(i, 1)
-  //     }
-  //   }
-  // }
-  // Would filter work without being able to access the next element using i?
-  // userTunes.filter((tune) => {
-  //   tune.title
-  // })
 
   let display = `<h6>${userTunes.length} tunes:</h6>`
   for (let i = 0; i < userTunes.length; i++) {
@@ -146,13 +126,13 @@ const showUsers = function (data) {
   $('#my-rep').removeClass('selected')
   $('#full-rep').removeClass('selected')
   $('#search').removeClass('disappear')
-  let emailList = []
+  const emailList = []
   store.userList = data
   store.userList.users.forEach(tune => emailList.push(tune.email))
   let display = '<h6>Choose 2 or more users and click "Get Shared Repertoire":</h6>'
   const alphaUsers = store.userList.users.sort(function (a, b) {
-    let nameA = a.email.toUpperCase()
-    let nameB = b.email.toUpperCase()
+    const nameA = a.email.toUpperCase()
+    const nameB = b.email.toUpperCase()
     if (nameA < nameB) {
       return -1
     }
