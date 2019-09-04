@@ -224,19 +224,23 @@ const deleteCheckedTunes = function () {
 }
 let checkedUserTunes = []
 let combinedTunes = []
+
 const findCommonTunes = function () {
+  const commonTunes = {}
   combinedTunes = []
   const numOfCheckedUsers = checkedUserTunes.length
   const flattenedUserTunes = [].concat.apply([], checkedUserTunes)
   for (let i = 0; i < flattenedUserTunes.length; i++) {
-    let counter = 0
-    for (let j = i; j < flattenedUserTunes.length; j++) {
-      if (((flattenedUserTunes[i].title.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].title.toUpperCase().replace(/\s/g, '')) && (flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '') === flattenedUserTunes[j].composer.toUpperCase().replace(/\s/g, '')))) {
-        counter++
-        if (counter === numOfCheckedUsers) {
-          combinedTunes.push(flattenedUserTunes[i])
-        }
+    const title = flattenedUserTunes[i].title.toUpperCase().replace(/\s/g, '')
+    const composer = flattenedUserTunes[i].composer.toUpperCase().replace(/\s/g, '')
+    if (commonTunes.hasOwnProperty(title + composer)) {
+      console.log('match found, checkedUserTunes', checkedUserTunes)
+      commonTunes[title + composer] += 1
+      if (commonTunes[title + composer] === numOfCheckedUsers) {
+        combinedTunes.push(flattenedUserTunes[i])
       }
+    } else {
+      commonTunes[title + composer] = 1
     }
   }
   ui.showCombinedTunes(combinedTunes)
